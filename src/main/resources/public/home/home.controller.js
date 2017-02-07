@@ -8,7 +8,7 @@
     function homeController(homeEndpoints) {
       var vm = this;
 
-      vm.welcome = 'Welcome to PodSurfer';
+      vm.welcome = 'Welcome to PodSurfer my dude';
       vm.outOfZen = false;
       vm.getZen = getZen;
 
