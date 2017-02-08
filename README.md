@@ -1,6 +1,4 @@
 # PodSurfer Project
-Codeship test 2
-test
 So this is our Git repository for the PodSurfer project! I forked the template project so that we'd have their commit history in ours also and so that we also have all the stuff from their readme. Let me know if you guys want to change anything about this setup!
 
 ---
