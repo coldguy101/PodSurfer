@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="mentor in contact.mentors">
+                <tr *ngFor="let mentor of mentors">
                     <td>{{mentor.name}}</td>
                     <td>{{mentor.email}}</td>
                     <td>{{mentor.university}}</td>

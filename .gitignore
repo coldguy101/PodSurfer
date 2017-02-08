@@ -1,2 +1,11 @@
+.idea/
+
+#Ignore all instances of node_modules
+**node_modules/
+
+#Ignore all iml files (intelliJ files)
 podsurfer-template.iml
+PodSurfer.iml
+
+#Ignore the target directory (spring output dir)
 target/
