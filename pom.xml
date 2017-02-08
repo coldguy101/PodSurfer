@@ -52,8 +52,13 @@
     </dependencies>
 
     <build>
-        <plugins>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources/</directory>
+            </resource>
+        </resources>
 
+        <plugins>
             <!-- Sass compiler -->
             <plugin>
                 <groupId>org.jasig.maven</groupId>
