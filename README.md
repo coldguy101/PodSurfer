@@ -1,13 +1,7 @@
 # PodSurfer Project
-<<<<<<< HEAD
-=======
-Testing heroku and codeship integration
 
-test
->>>>>>> 78be7e891c2ac7ff3fd2c01b3becb39c414461e6
-So this is our Git repository for the PodSurfer project! I forked the template project so that we'd have their commit history in ours also and so that we also have all the stuff from their readme. Let me know if you guys want to change anything about this setup!
-
----
+## Heroku App Url
+http://podsurfergroup3.herokuapp.com/#/home
 
 ## Using Git
 For this project, you will need to manage your project using Git. Git is a version control system that is used for software development and other version control tasks. As a distributed revision control system it is aimed at speed, data integrity, and support for distributed, non-linear workflows.
