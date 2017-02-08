@@ -14,7 +14,7 @@ import java.util.Date;
 public class MainController {
 	@RequestMapping("/map")
 	public @ResponseBody String map() {
-		return "map" + "I am a banana";
+		return "map";
 	}
 
 	@RequestMapping("/mentors")
