@@ -11,7 +11,7 @@ export class HomeService {
         return this.http.get("https://api.github.com/zen")
         //return this.http.get("https://api.slack.com/api/api.test")
             .toPromise()
-            .then(      /*res => res.text()*/     function(res){return res.text();})
+            .then((res: any) => res.text())
             .catch(this.handleError);
     }
 

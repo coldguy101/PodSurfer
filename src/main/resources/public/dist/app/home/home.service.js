@@ -18,7 +18,7 @@ let HomeService = class HomeService {
     getZen() {
         return this.http.get("https://api.github.com/zen")
             .toPromise()
-            .then(function (res) { return res.text(); })
+            .then((res) => res.text())
             .catch(this.handleError);
     }
     handleError(error) {
