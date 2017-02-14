@@ -8,7 +8,7 @@ import { ContactService } from './contact.service';
 })
 export class ContactComponent implements OnInit {
 
-  mentors: any[];
+  mentors: any;
 
   constructor(private contactService: ContactService) {}
 

@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
 
     getZen() {
         let that = this;
+
         let success = function(theZen: string) {
             that.zen = theZen;
         };

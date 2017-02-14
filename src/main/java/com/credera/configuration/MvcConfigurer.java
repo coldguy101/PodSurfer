@@ -14,13 +14,15 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // Resources with Cache Control
         registry.addResourceHandler("/**")
-            .addResourceLocations("classpath:/public/")
+            .addResourceLocations("classpath:/public/dist/")
             .setCachePeriod(604800);
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("forward:/index.html");
+        registry.addViewController("/home").setViewName("forward:/index.html");
+        registry.addViewController("/about").setViewName("forward:/index.html");
     }
 
 }

@@ -52,11 +52,11 @@
     </dependencies>
 
     <build>
-        <resources>
+        <!--<resources>
             <resource>
                 <directory>${project.basedir}/src/main/resources/</directory>
             </resource>
-        </resources>
+        </resources>-->
 
         <plugins>
             <!-- Sass compiler -->

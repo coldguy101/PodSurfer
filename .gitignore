@@ -1,7 +1,8 @@
 .idea/
 
 #Ignore all instances of node_modules
-**node_modules/
+#**node_modules/
+src/main/resources/public/node_modules/
 
 #Ignore all iml files (intelliJ files)
 podsurfer-template.iml
