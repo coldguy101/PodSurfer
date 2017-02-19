@@ -23,6 +23,7 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
         registry.addViewController("/").setViewName("forward:/index.html");
         registry.addViewController("/home").setViewName("forward:/index.html");
         registry.addViewController("/about").setViewName("forward:/index.html");
+        registry.addViewController("/podcasts").setViewName("forward:/index.html");
     }
 
 }
