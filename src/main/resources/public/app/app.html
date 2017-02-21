@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<!--<nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" routerLink="/home"><i class="fa fa-connectdevelop"></i> PodSurfer</a>
@@ -7,7 +7,7 @@
             <!--<li><a routerLink="/home"><i class="fa fa-home"></i> Home</a></li>
             <li><a routerLink="/about"><i class="fa fa-shield"></i> About</a></li>
             <li><a routerLink="/contact"><i class="fa fa-comment"></i> Contact</a></li>-->
-            <li><a routerLink="/home"><i class="fa fa-home"></i> Home</a></li>
+            <!--<li><a routerLink="/home"><i class="fa fa-home"></i> Home</a></li>
             <li><a routerLink="/about"><i class="fa fa-shield"></i> About</a></li>
             <li><a routerLink="/contact"><i class="fa fa-comment"></i> Contactt</a></li>
             <li><a routerLink="/podcast"><i class="fa fa-podcast"></i> Podcast</a></li>
@@ -15,5 +15,29 @@
             <li><a routerLink="/profile"><i class="fa fa-user-o"></i> MyProfile</a></li>
         </ul>
     </div>
-</nav>
+</nav>-->
+<header class="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
+    <div class="mdl-layout__header-row portfolio-logo-row">
+                <span class="mdl-layout__title">
+                    <div class="portfolio-logo"></div>
+                    <span class="mdl-layout__title">Simple portfolio website</span>
+                </span>
+    </div>
+    <div class="mdl-layout__header-row portfolio-navigation-row mdl-layout--large-screen-only">
+        <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+            <a routerLink="/home" routerLinkActive="is-active" class="mdl-navigation__link">Home</a>
+            <a routerLink="/podcast" routerLinkActive="is-active" class="mdl-navigation__link">Podcasts</a>
+            <a routerLink="/about" routerLinkActive="is-active" class="mdl-navigation__link">About</a>
+            <a routerLink="/contact" routerLinkActive="is-active" class="mdl-navigation__link">Contact</a>
+        </nav>
+    </div>
+</header>
+<div class="mdl-layout__drawer mdl-layout--small-screen-only">
+    <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+        <a routerLink="/home" routerLinkActive="is-active" class="mdl-navigation__link">Home</a>
+        <a routerLink="/podcast" routerLinkActive="is-active" class="mdl-navigation__link">Podcasts</a>
+        <a routerLink="/about" routerLinkActive="is-active" class="mdl-navigation__link">About</a>
+        <a routerLink="/contact" routerLinkActive="is-active" class="mdl-navigation__link">Contact</a>
+    </nav>
+</div>
 <router-outlet></router-outlet>

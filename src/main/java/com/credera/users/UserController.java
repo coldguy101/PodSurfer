@@ -1,6 +1,7 @@
 package com.credera.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -26,14 +27,19 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping("/me")
+    public UserModel getYourInfo(@RequestHeader HttpHeaders headers) {
+        return usrService.getUserInfo(headers);
+    }
+
+    @RequestMapping("/create")
+    public @ResponseBody String create(UserModel user) {
+        return "";
+    }
+
     /*@RequestMapping("/user")
     public UserModel[] getUsers() {
         return usrService.getAllUsers();
     }*/
-
-    @RequestMapping("/me")
-    public UserModel getYourInfo() {
-        return usrService.getUserInfo();
-    }
 
 }
