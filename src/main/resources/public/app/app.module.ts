@@ -7,6 +7,7 @@ import { HttpModule }             from '@angular/http'
 import { AboutComponent }         from './about/about.component';
 import { AppComponent }           from './app.component';
 import { ContactComponent }       from './contact/contact.component';
+import { FilterPipe }             from './filtering/filter';
 import { HomeComponent }          from './home/home.component';
 import { LoginComponent }         from './login/login.component';
 import { PodcastComponent }       from './podcast/podcast.component';
@@ -44,6 +45,7 @@ const routes: Routes = [
     AboutComponent,
     AppComponent,
     ContactComponent,
+    FilterPipe,
     HomeComponent,
     LoginComponent,
     PodcastComponent,

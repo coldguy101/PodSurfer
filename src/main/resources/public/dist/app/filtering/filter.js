@@ -9,26 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-const http_1 = require('@angular/http');
-require('rxjs/add/operator/toPromise');
-let PodcastService = class PodcastService {
-    constructor(http) {
-        this.http = http;
-    }
-    getAllPodcasts() {
-        return this.http.get("/api/podcasts")
-            .toPromise()
-            .then(res => res.json())
-            .catch(this.handleError);
-    }
-    handleError(error) {
-        console.error('An error occurred retrieving podcasts', error);
-        return Promise.reject(error.message || error);
+let FilterPipe = class FilterPipe {
+    transform(items, field, value) {
+        if (!items)
+            return [];
+        return items.filter(it => it[field].includes(value));
     }
 };
-PodcastService = __decorate([
+FilterPipe = __decorate([
+    core_1.Pipe({
+        name: 'filter'
+    }),
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [http_1.Http])
-], PodcastService);
-exports.PodcastService = PodcastService;
-//# sourceMappingURL=podcast.service.js.map
+    __metadata('design:paramtypes', [])
+], FilterPipe);
+exports.FilterPipe = FilterPipe;
+//# sourceMappingURL=filter.js.map

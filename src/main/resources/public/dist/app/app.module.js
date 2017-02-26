@@ -16,6 +16,7 @@ const http_1 = require('@angular/http');
 const about_component_1 = require('./about/about.component');
 const app_component_1 = require('./app.component');
 const contact_component_1 = require('./contact/contact.component');
+const filter_1 = require('./filtering/filter');
 const home_component_1 = require('./home/home.component');
 const login_component_1 = require('./login/login.component');
 const podcast_component_1 = require('./podcast/podcast.component');
@@ -43,6 +44,7 @@ AppModule = __decorate([
             about_component_1.AboutComponent,
             app_component_1.AppComponent,
             contact_component_1.ContactComponent,
+            filter_1.FilterPipe,
             home_component_1.HomeComponent,
             login_component_1.LoginComponent,
             podcast_component_1.PodcastComponent,
