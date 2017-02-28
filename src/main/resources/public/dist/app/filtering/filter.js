@@ -13,7 +13,9 @@ let FilterPipe = class FilterPipe {
     transform(items, field, value) {
         if (!items)
             return [];
-        return items.filter(it => it[field].includes(value));
+        if (!field || !value)
+            return items;
+        return items.filter(it => it[field].toLowerCase().includes(value.toLowerCase()));
     }
 };
 FilterPipe = __decorate([
