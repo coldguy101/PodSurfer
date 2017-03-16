@@ -1,22 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
+import { PodcastService } from "../podcast/podcast.service";
 
 @Component ({
     selector: 'home',
     templateUrl: './app/home/home.html',
-    providers: [ HomeService ]
+    providers: [ HomeService, PodcastService ]
 })
 export class HomeComponent implements OnInit {
 
     welcome: string;
+    recommendedPodcasts: any;
+    search: string;
     zen: string;
 
-    constructor(private homeService: HomeService) {
-        this.welcome = "Hello There!";
+    constructor(private homeService: HomeService, private podcastService: PodcastService) {
+        this.welcome = "Search for Podcasts!";
         this.zen = "Temporary";
     }
 
     ngOnInit() {
+        let that = this;
+
+        let success = function (podcasts: any) {
+            that.recommendedPodcasts = podcasts;
+        };
+
+        this.podcastService.getAllPodcasts().then(success);
+    }
+
+    /*ngOnInit() {
         this.getZen();
     }
 
@@ -28,5 +41,5 @@ export class HomeComponent implements OnInit {
         };
 
         this.homeService.getZen().then(success);
-    }
+    }*/
 }

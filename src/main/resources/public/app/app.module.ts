@@ -10,7 +10,7 @@ import { ContactComponent }       from './contact/contact.component';
 import { FilterPipe }             from './filtering/filter';
 import { HomeComponent }          from './home/home.component';
 import { LoginComponent }         from './login/login.component';
-import { PodcastComponent }       from './podcast/podcast.component';
+import { PodcastsComponent }       from './podcast/podcasts.component';
 import { ProfileComponent }       from "./profile/profile.component";
 
 const routes: Routes = [
@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'podcast', component: PodcastComponent},
+  {path: 'podcasts', component: PodcastsComponent},
   {path: 'profile', component: ProfileComponent}
   //{ path: 'hero/:id',      component: HeroDetailComponent },
   //{
@@ -48,12 +48,11 @@ const routes: Routes = [
     FilterPipe,
     HomeComponent,
     LoginComponent,
-    PodcastComponent,
+    PodcastsComponent,
     ProfileComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 
-export class AppModule {
-}
+export class AppModule {}

@@ -19,7 +19,7 @@ const contact_component_1 = require('./contact/contact.component');
 const filter_1 = require('./filtering/filter');
 const home_component_1 = require('./home/home.component');
 const login_component_1 = require('./login/login.component');
-const podcast_component_1 = require('./podcast/podcast.component');
+const podcasts_component_1 = require('./podcast/podcasts.component');
 const profile_component_1 = require("./profile/profile.component");
 const routes = [
     { path: 'about', component: about_component_1.AboutComponent },
@@ -27,7 +27,7 @@ const routes = [
     { path: '', component: home_component_1.HomeComponent },
     { path: 'home', component: home_component_1.HomeComponent },
     { path: 'login', component: login_component_1.LoginComponent },
-    { path: 'podcast', component: podcast_component_1.PodcastComponent },
+    { path: 'podcasts', component: podcasts_component_1.PodcastsComponent },
     { path: 'profile', component: profile_component_1.ProfileComponent }
 ];
 let AppModule = class AppModule {
@@ -47,7 +47,7 @@ AppModule = __decorate([
             filter_1.FilterPipe,
             home_component_1.HomeComponent,
             login_component_1.LoginComponent,
-            podcast_component_1.PodcastComponent,
+            podcasts_component_1.PodcastsComponent,
             profile_component_1.ProfileComponent
         ],
         providers: [],

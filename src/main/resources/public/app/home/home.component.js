@@ -10,30 +10,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const home_service_1 = require('./home.service');
+const podcast_service_1 = require("../podcast/podcast.service");
 let HomeComponent = class HomeComponent {
-    constructor(homeService) {
+    constructor(homeService, podcastService) {
         this.homeService = homeService;
-        this.welcome = "Hello There!";
+        this.podcastService = podcastService;
+        this.welcome = "Search for Podcasts!";
         this.zen = "Temporary";
     }
     ngOnInit() {
-        this.getZen();
-    }
-    getZen() {
         let that = this;
-        let success = function (theZen) {
-            that.zen = theZen;
+        let success = function (podcasts) {
+            that.recommendedPodcasts = podcasts;
         };
-        this.homeService.getZen().then(success);
+        this.podcastService.getAllPodcasts().then(success);
     }
 };
 HomeComponent = __decorate([
     core_1.Component({
         selector: 'home',
         templateUrl: './app/home/home.html',
-        providers: [home_service_1.HomeService]
+        providers: [home_service_1.HomeService, podcast_service_1.PodcastService]
     }), 
-    __metadata('design:paramtypes', [home_service_1.HomeService])
+    __metadata('design:paramtypes', [home_service_1.HomeService, podcast_service_1.PodcastService])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

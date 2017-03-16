@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = require('@angular/core');
 let FilterPipe = class FilterPipe {
     transform(items, field, value) {
+        let theItems = [];
         if (!items)
             return [];
         if (!field || !value)

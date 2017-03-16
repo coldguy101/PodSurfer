@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const podcast_service_1 = require('./podcast.service');
-let PodcastComponent = class PodcastComponent {
+let PodcastsComponent = class PodcastsComponent {
     constructor(podcastService) {
         this.podcastService = podcastService;
         this.message = "All your swanky podcasts are here:";
@@ -23,13 +23,13 @@ let PodcastComponent = class PodcastComponent {
         this.podcastService.getAllPodcasts().then(success);
     }
 };
-PodcastComponent = __decorate([
+PodcastsComponent = __decorate([
     core_1.Component({
         selector: 'podcast',
-        templateUrl: './app/podcast/podcast.html',
+        templateUrl: './app/podcast/podcasts.html',
         providers: [podcast_service_1.PodcastService]
     }), 
     __metadata('design:paramtypes', [podcast_service_1.PodcastService])
-], PodcastComponent);
-exports.PodcastComponent = PodcastComponent;
-//# sourceMappingURL=podcast.component.js.map
+], PodcastsComponent);
+exports.PodcastsComponent = PodcastsComponent;
+//# sourceMappingURL=podcasts.component.js.map

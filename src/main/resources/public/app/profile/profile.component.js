@@ -9,18 +9,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
+const profile_service_1 = require('./profile.service');
 let ProfileComponent = class ProfileComponent {
-    constructor() {
-        this.message = "Profile Page";
+    constructor(profileService) {
+        this.profileService = profileService;
+        this.user = {
+            "_id": "012345678912",
+            "name": "Kelleigh Laine",
+            "email": "kelleigh.maroney@gmail.com",
+            "interests": ["technology", "politics"],
+            "bookmarks": ["123456789123", "234567891234"]
+        };
+        this.message = "Welcome";
+    }
+    ngOnInit() {
+        const that = this;
+        let success = function (user) {
+            that.user = user;
+        };
+        this.profileService.getMyProfile().then(success);
     }
 };
 ProfileComponent = __decorate([
     core_1.Component({
         selector: 'profile',
         templateUrl: './app/profile/profile.html',
-        providers: []
+        providers: [profile_service_1.ProfileService]
     }), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [profile_service_1.ProfileService])
 ], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;
 //# sourceMappingURL=profile.component.js.map
