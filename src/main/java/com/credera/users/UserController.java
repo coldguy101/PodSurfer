@@ -19,16 +19,21 @@ public class UserController {
     @Autowired
     private UserService usrService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @RequestMapping(
+            value = "/login",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
     public @ResponseBody String login(UserModel user) {
-        //System.out.println("Email: " + user.getEmail() + " Pass: " + user.getPassword());
+        System.out.println("Email: " + user.getEmail() + " Pass: " + user.getPassword());
         String result = usrService.loginExistingUser(user.getEmail(), user.getPassword());
-        //System.out.println("Response: " + result);
+        System.out.println("Response: " + result);
         return result;
     }
 
     @RequestMapping("/me")
-    public UserModel getYourInfo(@RequestHeader HttpHeaders headers) {
+    public String getYourInfo(@RequestHeader HttpHeaders headers) {
+        System.out.println("Headers: " + headers);
         return usrService.getUserInfo(headers);
     }
 

@@ -13,13 +13,13 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // Resources with Cache Control
-        registry.addResourceHandler("/**")
-            .addResourceLocations("classpath:/public/dist/")
-            .setCachePeriod(604800);
+//        registry.addResourceHandler("/**")
+//            .addResourceLocations("classpath:/public/dist/")
+//            .setCachePeriod(604800);
 
-        //registry.addResourceHandler("/**")
-        //    .addResourceLocations("classpath:/public/")
-        //    .setCachePeriod(604800);
+        registry.addResourceHandler("/**")
+            .addResourceLocations("classpath:/public/")
+            .setCachePeriod(604800);
     }
 
     @Override
