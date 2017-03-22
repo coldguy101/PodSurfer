@@ -27,24 +27,23 @@ public class ReviewController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
+    @ResponseBody
     public String createReview(ReviewModel review) {
-        System.out.println("Name: " + review.getName() + " Podcast: " + review.getPodcast());
-        System.out.println("Review: " + review.getReview() + " Rating: " + review.getRating());
         String result = revService.createNewReview(review);
         System.out.println("Response: " + result);
         return result;
 
     }
 
-    /* @RequestMapping(
-            value = "/login",
+    /*@RequestMapping(
+            value = "/create",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
-    public @ResponseBody String login(UserModel user) {
+    public @ResponseBody String createUser(UserModel user) {
         System.out.println("Email: " + user.getEmail() + " Pass: " + user.getPassword());
-        String result = usrService.loginExistingUser(user.getEmail(), user.getPassword());
-        System.out.println("Response: " + result);
+        String result = usrService.createUser(user.getName(), user.getEmail(), user.getPassword());
+        System.out.println("Response:" + result);
         return result;
     }*/
 

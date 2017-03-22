@@ -30,19 +30,10 @@ public class UserService {
         return auth.getBody();
     }
 
-    public String createUser(String name, String email, String pass) {
+    public String createUser(HttpHeaders headers, HttpEntity<String> entity) {
         RestTemplate rt = new RestTemplate();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
-        data.add("email", email);
-        data.add("password", pass);
-        data.add("name", name);
-
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(data, headers);
-        ResponseEntity<String> auth = rt.postForEntity("https://podsurfer-spring3.herokuapp.com/api/user", request, String.class);
+        ResponseEntity<String> auth = rt.postForEntity("https://podsurfer-spring3.herokuapp.com/api/user", entity, String.class);
 
         System.out.println(auth.getBody());
         return auth.getBody();

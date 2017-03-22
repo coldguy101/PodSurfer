@@ -47,9 +47,10 @@ public class UserController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
-    public @ResponseBody String createUser(UserModel user) {
-        System.out.println("Email: " + user.getEmail() + " Pass: " + user.getPassword());
-        String result = usrService.createUser(user.getName(), user.getEmail(), user.getPassword());
+    public @ResponseBody String createUser(
+            @RequestHeader HttpHeaders headers,
+            HttpEntity<String> entity) {
+        String result = usrService.createUser(headers, entity);
         System.out.println("Response:" + result);
         return result;
     }

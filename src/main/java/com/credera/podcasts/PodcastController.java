@@ -51,10 +51,35 @@ public class PodcastController {
         return podService.getPodcast();
     }
 
-    @RequestMapping("/update")
-    public String updatePodcast(@RequestHeader HttpHeaders headers) {
-        System.out.println("Headers: " + headers);
-        return podService.updatePodcast(headers);
+    @RequestMapping(
+            value = "/update/{id}",
+            method = RequestMethod.PUT,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    @ResponseBody
+    public String updatePodcast(
+            @PathVariable(value="id") String id,
+            @RequestHeader HttpHeaders headers,
+            HttpEntity<String> entity) {
+        System.out.println("ID: " + id);
+        String result = podService.updatePodcast(headers, entity, id);
+        System.out.println("Response:" + result);
+        return result;
     }
+
+    /* @RequestMapping(
+            value = "/update/{id}",
+            method = RequestMethod.PUT,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public String updateReview(
+            @PathVariable(value="id") String id,
+            @RequestHeader HttpHeaders headers,
+            @RequestBody MultiValueMap<String, String> bod) {
+        System.out.println("Headers: " + headers);
+        System.out.println("id: " + id);
+        System.out.println("body: bod");
+        return revService.updateReview(id, headers, bod);
+    }*/
 
 }
