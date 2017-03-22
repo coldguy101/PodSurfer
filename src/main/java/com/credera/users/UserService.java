@@ -47,6 +47,8 @@ public class UserService {
 
         HttpEntity<HttpHeaders> head = new HttpEntity<>(headers);
 
+        System.out.println(headers);
+
         ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/user/me", HttpMethod.GET, head, String.class);
 
         return res.getBody();

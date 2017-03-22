@@ -19,16 +19,19 @@ const contact_component_1 = require('./contact/contact.component');
 const filter_1 = require('./filtering/filter');
 const home_component_1 = require('./home/home.component');
 const login_component_1 = require('./login/login.component');
+const login_guard_1 = require('./guards/login.guard');
 const podcasts_component_1 = require('./podcast/podcasts.component');
-const profile_component_1 = require("./profile/profile.component");
+const podcast_component_1 = require('./podcast/podcast.component');
+const profile_component_1 = require('./profile/profile.component');
 const routes = [
+    { path: '', component: home_component_1.HomeComponent },
     { path: 'about', component: about_component_1.AboutComponent },
     { path: 'contact', component: contact_component_1.ContactComponent },
-    { path: '', component: home_component_1.HomeComponent },
     { path: 'home', component: home_component_1.HomeComponent },
     { path: 'login', component: login_component_1.LoginComponent },
     { path: 'podcasts', component: podcasts_component_1.PodcastsComponent },
-    { path: 'profile', component: profile_component_1.ProfileComponent }
+    { path: 'podcast/:id', component: podcast_component_1.PodcastComponent },
+    { path: 'profile', component: profile_component_1.ProfileComponent, canActivate: [login_guard_1.LoginGuard] },
 ];
 let AppModule = class AppModule {
 };
@@ -48,6 +51,7 @@ AppModule = __decorate([
             home_component_1.HomeComponent,
             login_component_1.LoginComponent,
             podcasts_component_1.PodcastsComponent,
+            podcast_component_1.PodcastComponent,
             profile_component_1.ProfileComponent
         ],
         providers: [],

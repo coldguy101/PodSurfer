@@ -15,6 +15,12 @@ let PodcastService = class PodcastService {
     constructor(http) {
         this.http = http;
     }
+    getPodcastFromID(id) {
+        return this.http.get("/api/podcast/" + id)
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError);
+    }
     getAllPodcasts() {
         return this.http.get("/api/podcasts")
             .toPromise()

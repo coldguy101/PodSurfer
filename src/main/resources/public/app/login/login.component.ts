@@ -1,11 +1,35 @@
 import { Component } from '@angular/core';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component ({
   selector: 'login',
   templateUrl: './app/login/login.html',
   styleUrls: ['./app/login/login.css'],
-  providers: [  ]
+  providers: [ LoginService ]
 })
 export class LoginComponent {
   message = "Login Page";
+  loading: boolean = false;
+  model: any = {};
+
+  constructor(private loginService: LoginService, private router: Router) {}
+
+  login() {
+    this.loading = true;
+    console.log("I GOT HERE!!!!!");
+    this.loginService.login(this.model.email, this.model.password).subscribe(
+      res => {
+        //console.log(res);
+        if (res) {
+          this.router.navigate(['/']);
+        }
+      },
+      error => {
+        //alert("error logging in");
+        console.log(error);
+        this.loading = false;
+      }
+    );
+  }
 }

@@ -3,7 +3,7 @@
 
     <input type="text" [(ngModel)]="selection">
 
-    <p>{{ selection }}</p>
+    <!--<p>{{ selection }}</p>-->
 
     <ul class="mdl-list">
         <li *ngFor="let podcast of podcasts | filter : 'name' : selection" class="mdl-list__item mdl-list__item--three-line">

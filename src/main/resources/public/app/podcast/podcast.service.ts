@@ -7,6 +7,13 @@ export class PodcastService {
 
   constructor(private http: Http) {}
 
+  getPodcastFromID(id: number) {
+    return this.http.get("/api/podcast/" + id)
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError);
+  }
+
   getAllPodcasts(): Promise<any> {
     // return Promise.resolve([
     //   {

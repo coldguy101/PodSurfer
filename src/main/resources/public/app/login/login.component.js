@@ -9,9 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
+const login_service_1 = require('./login.service');
+const router_1 = require('@angular/router');
 let LoginComponent = class LoginComponent {
-    constructor() {
+    constructor(loginService, router) {
+        this.loginService = loginService;
+        this.router = router;
         this.message = "Login Page";
+        this.loading = false;
+        this.model = {};
+    }
+    login() {
+        this.loading = true;
+        console.log("I GOT HERE!!!!!");
+        this.loginService.login(this.model.email, this.model.password).subscribe(res => {
+            if (res) {
+                this.router.navigate(['/']);
+            }
+        }, error => {
+            console.log(error);
+            this.loading = false;
+        });
     }
 };
 LoginComponent = __decorate([
@@ -19,9 +37,9 @@ LoginComponent = __decorate([
         selector: 'login',
         templateUrl: './app/login/login.html',
         styleUrls: ['./app/login/login.css'],
-        providers: []
+        providers: [login_service_1.LoginService]
     }), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [login_service_1.LoginService, router_1.Router])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

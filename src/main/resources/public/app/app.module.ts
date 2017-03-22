@@ -10,17 +10,22 @@ import { ContactComponent }       from './contact/contact.component';
 import { FilterPipe }             from './filtering/filter';
 import { HomeComponent }          from './home/home.component';
 import { LoginComponent }         from './login/login.component';
-import { PodcastsComponent }       from './podcast/podcasts.component';
-import { ProfileComponent }       from "./profile/profile.component";
+import { LoginGuard }             from './guards/login.guard';
+import { PodcastsComponent }      from './podcast/podcasts.component';
+import { PodcastComponent }       from './podcast/podcast.component';
+import { ProfileComponent }       from './profile/profile.component';
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
-  {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'podcasts', component: PodcastsComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'podcast/:id', component: PodcastComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [LoginGuard]},
+  // otherwise redirect to home
+  //{path: '**', redirectTo: ''}
   //{ path: 'hero/:id',      component: HeroDetailComponent },
   //{
   //    path: 'heroes',
@@ -49,6 +54,7 @@ const routes: Routes = [
     HomeComponent,
     LoginComponent,
     PodcastsComponent,
+    PodcastComponent,
     ProfileComponent
   ],
   providers: [],
