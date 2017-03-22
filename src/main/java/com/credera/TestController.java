@@ -21,7 +21,7 @@ import com.google.common.collect.Maps;
 @Controller
 public class TestController {
 	@Autowired
-	private FooService fooService;
+private FooService fooService;
 
 	private BarService barService = new BarService();
 
