@@ -1,6 +1,5 @@
 package com.credera.reviews;
 
-import com.credera.podcasts.PodcastModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Arrays;

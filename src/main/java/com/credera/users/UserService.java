@@ -30,8 +30,13 @@ public class UserService {
         return auth.getBody();
     }
 
-    public String makeNewUser(String name, String email, String pass) {
-        return "Not yet implemneted";
+    public String createUser(HttpHeaders headers, HttpEntity<String> entity) {
+        RestTemplate rt = new RestTemplate();
+
+        ResponseEntity<String> auth = rt.postForEntity("https://podsurfer-spring3.herokuapp.com/api/user", entity, String.class);
+
+        System.out.println(auth.getBody());
+        return auth.getBody();
     }
 
     /*public UserModel[] getAllUsers() {
@@ -48,6 +53,16 @@ public class UserService {
         HttpEntity<HttpHeaders> head = new HttpEntity<>(headers);
 
         ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/user/me", HttpMethod.GET, head, String.class);
+
+        return res.getBody();
+    }
+
+    public String update(HttpHeaders headers) {
+        RestTemplate rt = new RestTemplate();
+
+        HttpEntity<HttpHeaders> head = new HttpEntity<>(headers);
+
+        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/user/", HttpMethod.PUT, head, String.class);
 
         return res.getBody();
     }
