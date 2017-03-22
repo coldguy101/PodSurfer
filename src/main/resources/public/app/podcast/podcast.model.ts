@@ -8,6 +8,4 @@ export class Podcast {
   public episodes: any[];
   public tags: string[];
   public imageURL: string;
-
-
 }

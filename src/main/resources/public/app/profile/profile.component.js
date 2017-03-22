@@ -10,16 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const profile_service_1 = require('./profile.service');
+const login_service_1 = require('../login/login.service');
 let ProfileComponent = class ProfileComponent {
-    constructor(profileService) {
+    constructor(profileService, loginService) {
         this.profileService = profileService;
-        this.user = {
-            "_id": "012345678912",
-            "name": "Kelleigh Laine",
-            "email": "kelleigh.maroney@gmail.com",
-            "interests": ["technology", "politics"],
-            "bookmarks": ["123456789123", "234567891234"]
-        };
+        this.loginService = loginService;
         this.message = "Welcome";
     }
     ngOnInit() {
@@ -27,16 +22,16 @@ let ProfileComponent = class ProfileComponent {
         let success = function (user) {
             that.user = user;
         };
-        this.profileService.getMyProfile().then(success);
+        this.profileService.getProfile(this.loginService.getToken()).then(success);
     }
 };
 ProfileComponent = __decorate([
     core_1.Component({
         selector: 'profile',
         templateUrl: './app/profile/profile.html',
-        providers: [profile_service_1.ProfileService]
+        providers: [profile_service_1.ProfileService, login_service_1.LoginService]
     }), 
-    __metadata('design:paramtypes', [profile_service_1.ProfileService])
+    __metadata('design:paramtypes', [profile_service_1.ProfileService, login_service_1.LoginService])
 ], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;
 //# sourceMappingURL=profile.component.js.map

@@ -1,4 +1,6 @@
 <div class="jumbotron">
     <p>{{ message }}</p>
-    <p>Your user is: {{ user._id }}</p>
+    <p *ngIf="user">Your user ID is: {{ user._id }}</p>
+    <p *ngIf="user">Your user Name is: {{ user.name }} </p>
+    <p *ngIf="user">Your user Email is: {{ user.email }}</p>
 </div>

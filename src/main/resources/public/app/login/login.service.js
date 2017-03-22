@@ -17,6 +17,21 @@ let LoginService = class LoginService {
         this.loggedIn = !!localStorage.getItem('auth_token');
         console.log("User is logged in: " + this.loggedIn + " Token: " + localStorage.getItem('auth_token'));
     }
+    createUser(name, email, password) {
+        let headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        let body = `name=${name}&email=${email}&password=${password}`;
+        console.log(body);
+        return this.http
+            .post('/api/user/create', body, { headers: headers })
+            .map(res => res.json())
+            .map(res => {
+            console.log("Service: " + res);
+            localStorage.setItem('auth_token', res.token);
+            this.loggedIn = true;
+            return res;
+        });
+    }
     login(email, password) {
         let headers = new http_1.Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -37,6 +52,9 @@ let LoginService = class LoginService {
     }
     isLoggedIn() {
         return this.loggedIn;
+    }
+    getToken() {
+        return localStorage.getItem('auth_token');
     }
     handleError(error) {
         console.error('An error occurred', error);

@@ -1,10 +1,21 @@
 <div class="container">
     <div class="row">
-        <h2 class="text-center">{{welcome}} </h2>
+        <h2 class="text-center">{{welcome}}</h2>
     </div>
 
     <hr class="row"/>
-    <div class="row">
+
+    <input class="mdl-textfield--full-width" title="Search Podcasts..." type="text" [(ngModel)]="search">
+
+    <div *ngFor="let podcast of recommendedPodcasts | filter : 'description' : search | filter : 'name' : search" class="col-md-4">
+        <div class="well">
+            <h4 class="">{{podcast.name}}</h4>
+            <h6 class="">{{podcast.description}}</h6>
+        </div>
+    </div>
+
+
+    <!--<div class="row">
         <div class="col-xs-offset-4 col-xs-4">
             <button type="button" class="btn btn-primary btn-lg btn-block" (click)="getZen()">
                 Get Your Zen
@@ -13,5 +24,5 @@
         <div class="col-xs-12 text-center">
             <h3>{{zen}}</h3>
         </div>
-    </div>
+    </div>-->
 </div>

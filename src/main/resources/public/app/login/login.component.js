@@ -18,10 +18,21 @@ let LoginComponent = class LoginComponent {
         this.message = "Login Page";
         this.loading = false;
         this.model = {};
+        this.registerModel = {};
+    }
+    createUser() {
+        this.loading = true;
+        this.loginService.createUser(this.registerModel.name, this.registerModel.email, this.registerModel.password).subscribe(res => {
+            if (res) {
+                this.router.navigate(['/']);
+            }
+        }, error => {
+            console.log(error);
+            this.loading = false;
+        });
     }
     login() {
         this.loading = true;
-        console.log("I GOT HERE!!!!!");
         this.loginService.login(this.model.email, this.model.password).subscribe(res => {
             if (res) {
                 this.router.navigate(['/']);

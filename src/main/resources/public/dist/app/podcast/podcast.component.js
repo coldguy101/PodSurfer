@@ -9,18 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
+const router_1 = require('@angular/router');
 const podcast_service_1 = require('./podcast.service');
 let PodcastComponent = class PodcastComponent {
-    constructor(podcastService) {
+    constructor(podcastService, route) {
         this.podcastService = podcastService;
-        this.message = "All your swanky podcasts are here:";
+        this.route = route;
     }
     ngOnInit() {
-        const that = this;
-        let success = function (podcasts) {
-            that.podcasts = podcasts;
-        };
-        this.podcastService.getAllPodcasts().then(success);
+        this.subscription = this.route.params.subscribe(params => {
+            this.podID = +params['id'];
+            const that = this;
+            let success = function (pod) {
+                that.podcast = pod;
+            };
+            this.podcastService.getPodcastFromID(this.podID).then(success);
+        });
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 };
 PodcastComponent = __decorate([
@@ -29,7 +36,7 @@ PodcastComponent = __decorate([
         templateUrl: './app/podcast/podcast.html',
         providers: [podcast_service_1.PodcastService]
     }), 
-    __metadata('design:paramtypes', [podcast_service_1.PodcastService])
+    __metadata('design:paramtypes', [podcast_service_1.PodcastService, router_1.ActivatedRoute])
 ], PodcastComponent);
 exports.PodcastComponent = PodcastComponent;
 //# sourceMappingURL=podcast.component.js.map

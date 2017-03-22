@@ -15,6 +15,8 @@ import { PodcastsComponent }      from './podcast/podcasts.component';
 import { PodcastComponent }       from './podcast/podcast.component';
 import { ProfileComponent }       from './profile/profile.component';
 
+import { LoginService }           from './login/login.service';
+
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
@@ -23,7 +25,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'podcasts', component: PodcastsComponent},
   {path: 'podcast/:id', component: PodcastComponent},
-  {path: 'profile', component: ProfileComponent, canActivate: [LoginGuard]},
+  {path: 'profile', component: ProfileComponent} //, canActivate: [LoginGuard]},
   // otherwise redirect to home
   //{path: '**', redirectTo: ''}
   //{ path: 'hero/:id',      component: HeroDetailComponent },
@@ -57,7 +59,7 @@ const routes: Routes = [
     PodcastComponent,
     ProfileComponent
   ],
-  providers: [],
+  providers: [LoginService, LoginGuard],
   bootstrap: [AppComponent]
 })
 

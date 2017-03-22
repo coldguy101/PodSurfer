@@ -9,22 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-let FilterPipe = class FilterPipe {
-    transform(items, field, value) {
-        let theItems = [];
-        if (!items)
-            return [];
-        if (!field || !value)
-            return items;
-        return items.filter(it => it[field].toLowerCase().includes(value.toLowerCase()));
+const login_service_1 = require('../login/login.service');
+let LoginGuard = class LoginGuard {
+    constructor(login) {
+        this.login = login;
+    }
+    canActivate() {
+        return this.login.isLoggedIn();
     }
 };
-FilterPipe = __decorate([
-    core_1.Pipe({
-        name: 'filter'
-    }),
+LoginGuard = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [])
-], FilterPipe);
-exports.FilterPipe = FilterPipe;
-//# sourceMappingURL=filter.js.map
+    __metadata('design:paramtypes', [login_service_1.LoginService])
+], LoginGuard);
+exports.LoginGuard = LoginGuard;
+//# sourceMappingURL=login.guard.js.map

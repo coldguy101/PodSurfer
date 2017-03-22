@@ -17,6 +17,25 @@ export class LoginService {
     console.log("User is logged in: " + this.loggedIn + " Token: " + localStorage.getItem('auth_token'));
   }
 
+  createUser(name: string, email: string, password: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let body = `name=${name}&email=${email}&password=${password}`;
+
+    console.log(body);
+
+    return this.http
+      .post('/api/user/create', /*JSON.stringify({email, password})*/ body, {headers: headers})
+      .map(res => res.json())
+      .map(res => {
+        console.log("Service: " + res);
+        localStorage.setItem('auth_token', res.token);
+        this.loggedIn = true;
+        return res;
+      });
+  }
+
   login(email: string, password: string) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -41,6 +60,10 @@ export class LoginService {
 
   isLoggedIn() {
     return this.loggedIn;
+  }
+
+  getToken() {
+    return localStorage.getItem('auth_token');
   }
 
   private handleError(error: any): PromiseLike<any> {

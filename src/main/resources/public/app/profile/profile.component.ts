@@ -1,23 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from './profile.service';
+import { LoginService } from '../login/login.service';
 
 @Component ({
   selector: 'profile',
   templateUrl: './app/profile/profile.html',
-  providers: [ ProfileService ]
+  providers: [ ProfileService, LoginService ]
 })
 export class ProfileComponent implements OnInit{
-  user ={
-    "_id": "012345678912",
-    "name": "Kelleigh Laine",
-    "email": "kelleigh.maroney@gmail.com",
-    "interests": ["technology", "politics"],
-    "bookmarks": ["123456789123", "234567891234"]
-  };
+  user: any;
   message = "Welcome";
   selection: string;
 
-  constructor(private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService, private loginService: LoginService) {}
 
   ngOnInit() {
     const that = this;
@@ -26,6 +21,6 @@ export class ProfileComponent implements OnInit{
       that.user = user;
     };
 
-    this.profileService.getMyProfile().then(success);
+    this.profileService.getProfile(this.loginService.getToken()).then(success);
   }
 }

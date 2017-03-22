@@ -9,30 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-const home_service_1 = require('./home.service');
-const podcast_service_1 = require("../podcast/podcast.service");
-let HomeComponent = class HomeComponent {
-    constructor(homeService, podcastService) {
-        this.homeService = homeService;
+const podcast_service_1 = require('./podcast.service');
+let PodcastsComponent = class PodcastsComponent {
+    constructor(podcastService) {
         this.podcastService = podcastService;
-        this.welcome = "Search for Podcasts!";
-        this.zen = "Temporary";
+        this.message = "All your swanky podcasts are here:";
     }
     ngOnInit() {
-        let that = this;
+        const that = this;
         let success = function (podcasts) {
-            that.recommendedPodcasts = podcasts;
+            that.podcasts = podcasts;
         };
         this.podcastService.getAllPodcasts().then(success);
     }
 };
-HomeComponent = __decorate([
+PodcastsComponent = __decorate([
     core_1.Component({
-        selector: 'home',
-        templateUrl: './app/home/home.html',
-        providers: [home_service_1.HomeService, podcast_service_1.PodcastService]
+        selector: 'podcast',
+        templateUrl: './app/podcast/podcasts.html',
+        providers: [podcast_service_1.PodcastService]
     }), 
-    __metadata('design:paramtypes', [home_service_1.HomeService, podcast_service_1.PodcastService])
-], HomeComponent);
-exports.HomeComponent = HomeComponent;
-//# sourceMappingURL=home.component.js.map
+    __metadata('design:paramtypes', [podcast_service_1.PodcastService])
+], PodcastsComponent);
+exports.PodcastsComponent = PodcastsComponent;
+//# sourceMappingURL=podcasts.component.js.map
