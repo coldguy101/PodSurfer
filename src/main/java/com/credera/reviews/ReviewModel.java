@@ -1,6 +1,5 @@
 package com.credera.reviews;
 
-import com.credera.podcasts.PodcastModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Arrays;
@@ -14,7 +13,7 @@ import java.util.Date;
 public class ReviewModel {
 
     private String name;
-    private int podcastID;
+    private String podcastID;
     private int episode;
     private int rating;
     private Boolean spoilers;
@@ -28,11 +27,11 @@ public class ReviewModel {
         this.name = name;
     }
 
-    public int getPodcast() {
+    public String getPodcast() {
         return podcastID;
     }
 
-    public void setPodcast(int podcast) {
+    public void setPodcast(String podcast) {
         this.podcastID = podcast;
     }
 

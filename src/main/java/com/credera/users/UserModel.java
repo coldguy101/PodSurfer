@@ -1,8 +1,6 @@
 package com.credera.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.corba.se.spi.ior.ObjectId;
-
 import java.util.Arrays;
 import java.util.Date;
 
@@ -16,9 +14,9 @@ public class UserModel {
     private String name;
     private String email;
     private String password;
-    private ObjectId id;
+    private String id;
     private String[] interests;
-    private ObjectId[] bookmarks;
+    private String[] bookmarks;
 
     public String getEmail() {
         return email;
@@ -44,11 +42,11 @@ public class UserModel {
         this.name = name;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -60,11 +58,11 @@ public class UserModel {
         this.interests = interests;
     }
 
-    public ObjectId[] getBookmarks() {
+    public String[] getBookmarks() {
         return bookmarks;
     }
 
-    public void setBookmarks(ObjectId[] bookmarks) {
+    public void setBookmarks(String[] bookmarks) {
         this.bookmarks = bookmarks;
     }
 

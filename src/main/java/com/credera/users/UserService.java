@@ -30,8 +30,22 @@ public class UserService {
         return auth.getBody();
     }
 
-    public String makeNewUser(String name, String email, String pass) {
-        return "Not yet implemneted";
+    public String createUser(String name, String email, String pass) {
+        RestTemplate rt = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+        data.add("email", email);
+        data.add("password", pass);
+        data.add("name", name);
+
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(data, headers);
+        ResponseEntity<String> auth = rt.postForEntity("https://podsurfer-spring3.herokuapp.com/api/user", request, String.class);
+
+        System.out.println(auth.getBody());
+        return auth.getBody();
     }
 
     /*public UserModel[] getAllUsers() {
@@ -48,6 +62,16 @@ public class UserService {
         HttpEntity<HttpHeaders> head = new HttpEntity<>(headers);
 
         ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/user/me", HttpMethod.GET, head, String.class);
+
+        return res.getBody();
+    }
+
+    public String update(HttpHeaders headers) {
+        RestTemplate rt = new RestTemplate();
+
+        HttpEntity<HttpHeaders> head = new HttpEntity<>(headers);
+
+        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/user/", HttpMethod.PUT, head, String.class);
 
         return res.getBody();
     }
