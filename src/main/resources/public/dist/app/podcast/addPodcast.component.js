@@ -10,31 +10,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const podcast_service_1 = require('./podcast.service');
-let PodcastsComponent = class PodcastsComponent {
-    constructor(podcastService) {
+const router_1 = require("@angular/router");
+let AddPodcastComponent = class AddPodcastComponent {
+    constructor(podcastService, router) {
         this.podcastService = podcastService;
-        this.message = "All your swanky podcasts are here:";
+        this.router = router;
+        this.inputData = {};
     }
     ngOnInit() {
-        const that = this;
-        let success = function (podcasts) {
-            that.podcasts = podcasts;
-        };
-        this.podcastService.getAllPodcasts().then(success);
     }
-    rmPodcast(id) {
-        console.log("RmPodcast Pushed on ID: " + id);
-        delete this.podcasts[id];
-        this.podcastService.rmPodcast(id);
+    addPodcast() {
+        this.podcastService.addPodcast(this.inputData).subscribe(res => {
+            console.log(res);
+            if (res) {
+                this.router.navigate(['/podcast/' + res._id]);
+            }
+        }, error => {
+            console.log(error);
+        });
     }
 };
-PodcastsComponent = __decorate([
+AddPodcastComponent = __decorate([
     core_1.Component({
-        selector: 'podcast',
-        templateUrl: './app/podcast/podcasts.html',
+        selector: 'addPodcast',
+        templateUrl: './app/podcast/addPodcast.html',
         providers: [podcast_service_1.PodcastService]
     }), 
-    __metadata('design:paramtypes', [podcast_service_1.PodcastService])
-], PodcastsComponent);
-exports.PodcastsComponent = PodcastsComponent;
-//# sourceMappingURL=podcasts.component.js.map
+    __metadata('design:paramtypes', [podcast_service_1.PodcastService, router_1.Router])
+], AddPodcastComponent);
+exports.AddPodcastComponent = AddPodcastComponent;
+//# sourceMappingURL=addPodcast.component.js.map

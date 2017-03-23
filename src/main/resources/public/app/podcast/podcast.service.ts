@@ -99,6 +99,21 @@ export class PodcastService {
       });
   }
 
+  rmPodcast(id: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Authorization', 'Bearer ' + this.loginService.getToken());
+    console.log("Headers: " + headers);
+    console.log("ID to del: " + id);
+    return this.http
+      .delete('/api/podcast/delete/' + id, {headers: headers})
+      .map(res => res.json())
+      .map(res => {
+        console.log("Podcast Service Delete: " + res);
+        return res;
+      });
+  }
+
   private encode(src: any){
   let u = encodeURIComponent;
   var urljson = "";

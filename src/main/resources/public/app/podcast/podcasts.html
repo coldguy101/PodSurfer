@@ -6,13 +6,18 @@
     <!--<p>{{ selection }}</p>-->
 
     <ul class="mdl-list">
-        <li *ngFor="let podcast of podcasts | filter : 'name' : selection" class="mdl-list__item mdl-list__item--three-line">
+        <li *ngFor="let podcast of podcasts | filter : 'name' : selection"
+            class="mdl-list__item mdl-list__item--three-line">
             <span class="mdl-list__item-primary-content">
                 <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
-              <a [routerLink]="['/podcast/' + podcast._id]">{{ podcast.name }}</a>
-              <span class="mdl-list__item-text-body">
-                {{ podcast.description }}
-              </span>
+                <a [routerLink]="['/podcast/' + podcast._id]">{{ podcast.name }}</a>
+                <span class="mdl-list__item-text-body">
+                    {{ podcast.description }}
+                    <button class="btn-danger" (click)="rmPodcast(podcast._id)">Delete</button>
+                </span>
+
+
+
             </span>
             <span class="mdl-list__item-secondary-content">
                 <a class="mdl-list__item-secondary-action" href="#">

@@ -1,5 +1,6 @@
 <nav class="navbar navbar-default">
     <div class="container">
+        <p (click)="toggleState()">Logged In: {{isLoggedIn}}</p>
         <div class="navbar-header">
             <a class="navbar-brand" routerLink="/home"><i class="fa fa-connectdevelop"></i> PodSurfer</a>
         </div>
@@ -14,7 +15,7 @@
             <li><a routerLink="/addPodcast"><i class="fa fa-podcast"></i> Add Podcast</a></li>
             <li *ngIf="isLoggedIn"><a routerLink="/profile"><i class="fa fa-user-o"></i> MyProfile</a></li>
             <li *ngIf="!isLoggedIn"><a routerLink="/login"><i class="fa fa-user"></i> Login</a></li>
-            <li *ngIf="isLoggedIn"><a routerLink="/logout"><i class="fa fa-user"></i> Logout</a></li>
+            <li *ngIf="isLoggedIn"><a href="#" (click)="logout()"><i class="fa fa-user"></i> Logout</a></li>
         </ul>
     </div>
 </nav>

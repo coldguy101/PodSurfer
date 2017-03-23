@@ -1,10 +1,11 @@
-<p>{{podcast._id}}</p>
-<p>{{podcast.name}}</p>
-<p>{{podcast.link}}</p>
-<p>{{podcast.release}}</p>
-<p>{{podcast.producer}}</p>
-<p>{{podcast.length}}</p>
-<p>{{podcast.description}}</p>
-<p>{{podcast.episodes}}</p>
-<p>{{podcast.tags}}</p>
-<p>{{podcast.imageURL}}</p>
+<p *ngIf="podCast">ID: {{podCast._id}}</p>
+<p *ngIf="podCast">Name: {{podCast.name}}</p>
+<p *ngIf="podCast">Link: {{podCast.link}}</p>
+<p *ngIf="podCast">Release: {{podCast.release}}</p>
+<p *ngIf="podCast">Producer: {{podCast.producer}}</p>
+<p *ngIf="podCast">Length: {{podCast.length}}</p>
+<p *ngIf="podCast">Desc: {{podCast.description}}</p>
+<!--<p *ngIf="podCast">{{podCast.episodes}}</p>
+<p *ngIf="podCast">{{podCast.tags}}</p>
+<p *ngIf="podCast">{{podCast.imageURL}}</p>
+-->

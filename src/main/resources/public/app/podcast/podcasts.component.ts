@@ -22,4 +22,10 @@ export class PodcastsComponent implements OnInit{
 
     this.podcastService.getAllPodcasts().then(success);
   }
+
+  rmPodcast(id: string) {
+    console.log("RmPodcast Pushed on ID: " + id);
+    delete this.podcasts[id];
+    this.podcastService.rmPodcast(id);
+  }
 }

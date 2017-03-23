@@ -18,10 +18,10 @@ let PodcastComponent = class PodcastComponent {
     }
     ngOnInit() {
         this.subscription = this.route.params.subscribe(params => {
-            this.podID = +params['id'];
+            this.podID = params['id'];
             const that = this;
             let success = function (pod) {
-                that.podcast = pod;
+                that.podCast = pod;
             };
             this.podcastService.getPodcastFromID(this.podID).then(success);
         });
