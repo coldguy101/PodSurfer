@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
+import {LoginService} from '../login/login.service';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class PodcastService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private loginService: LoginService) {}
 
-  getPodcastFromID(id: number) {
-    return this.http.get("/api/podcast/" + id)
+  getPodcastFromID(id: string) {
+    return this.http.get("/api/podcast/get/" + id)
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
@@ -73,12 +74,41 @@ export class PodcastService {
     //     imageURL: "google.com"
     //   }
     //   ]);
-    return this.http.get("/api/podcasts")
+    return this.http.get("/api/podcast/all")
       .toPromise()
       //.then(function(res){console.log(res)})
       .then(res => res.json())
       .catch(this.handleError);
   }
+
+  addPodcast(data: any) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Authorization', 'Bearer ' + this.loginService.getToken());
+
+    let body = this.encode(data);
+
+    console.log(body);
+
+    return this.http
+      .post('/api/podcast/create', /*JSON.stringify({email, password})*/ body, {headers: headers})
+      .map(res => res.json())
+      .map(res => {
+        console.log("Podcast Service Res: " + res);
+        return res;
+      });
+  }
+
+  private encode(src: any){
+  let u = encodeURIComponent;
+  var urljson = "";
+  var keys = Object.keys(src);
+  for(var i=0; i <keys.length; i++){
+    urljson += u(keys[i]) + "=" + u(src[keys[i]]);
+    if(i < (keys.length-1))urljson+="&";
+  }
+  return urljson;
+}
 
   private handleError(error: any): PromiseLike<any> {
     console.error('An error occurred retrieving podcasts', error); // TODO: Remove this for production

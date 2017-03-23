@@ -39,27 +39,19 @@ public class ReviewModelTest {
         assertEquals((model.getEpisode()),i);
     }
 
-
-
     @Test
     public void getRating() throws Exception {
         Integer i = 0;
         assertEquals(model.getRating(),i);
     }
 
-
     @Test
     public void getSpoilers() throws Exception {
         assertEquals(model.getSpoilers(),Boolean.FALSE);
     }
 
-
-
     @Test
     public void getReview() throws Exception {
         assertEquals(model.getReview(),"review");
     }
-
-
-
 }

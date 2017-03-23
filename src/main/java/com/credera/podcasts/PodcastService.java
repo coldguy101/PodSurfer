@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-
 /**
  * Created by sean on 2/14/17.
  */
@@ -23,19 +22,16 @@ public class PodcastService {
         return pm;
     }
 
-    public PodcastModel getPodcast() {
+    public PodcastModel getPodcast(String id) {
         RestTemplate rt = new RestTemplate();
-        PodcastModel pm = rt.getForObject("https://podsurfer-spring3.herokuapp.com/api/podcast/:id", PodcastModel.class);
+        PodcastModel pm = rt.getForObject("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, PodcastModel.class);
         System.out.println(pm);
         return pm;
     }
 
     public String createPodcast(HttpHeaders headers, HttpEntity<String> entity) {
         RestTemplate rt = new RestTemplate();
-
-        //System.out.println("Hello");
         ResponseEntity<String> auth = rt.postForEntity("https://podsurfer-spring3.herokuapp.com/api/podcast/", entity, String.class);
-
         System.out.println(auth.getBody());
         return auth.getBody();
     }
@@ -44,19 +40,27 @@ public class PodcastService {
     public String updatePodcast(HttpHeaders headers, HttpEntity<String> entity, String id) {
         RestTemplate rt = new RestTemplate();
 
-        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/podcast/", HttpMethod.PUT, entity, String.class, id);
+        rt.put("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, entity);
+
+
+        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, HttpMethod.PUT, entity, String.class);
 
         //("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, HttpMethod.PUT, entity, String.class);
 
+        System.out.println("asdfasdfasdfasfasdfasdfasdfasf: IDDDDD:    " + id);
+
+        System.out.println("BODYYYYYYY:     " + entity.getBody());
+
+        //return res.getBody();
         return res.getBody();
     }
 
-    public String deleteOldPodcast(HttpHeaders headers) {
+    public String deletePodcast(HttpHeaders headers, String id) {
         RestTemplate rt = new RestTemplate();
 
         HttpEntity<HttpHeaders> head = new HttpEntity<>(headers);
 
-        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/podcast/:id", HttpMethod.DELETE, head, String.class);
+        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, HttpMethod.DELETE, head, String.class);
 
         return res.getBody();
     }

@@ -12,6 +12,7 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PodcastModel {
 
+    private String _id = "Empty";
     private String name = "Empty";
     private String link = "Empty";
     private Date release;
@@ -21,6 +22,14 @@ public class PodcastModel {
     private Object[] episodes;
     private String[] tags;
     private String imageURL = "Empty";
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String id) {
+        this._id = id;
+    }
 
     public String getName() {
         return name;

@@ -39,14 +39,6 @@ public class UserService {
         return auth.getBody();
     }
 
-    /*public UserModel[] getAllUsers() {
-        RestTemplate rt = new RestTemplate();
-        UserModel[] pm = rt.getForObject("https://podsurfer-spring3.herokuapp.com/api/user/", UserModel[].class);
-        for(UserModel pmm : pm)
-            System.out.println(pmm);
-        return pm;
-    }*/
-
     public String getUserInfo(HttpHeaders headers) {
         RestTemplate rt = new RestTemplate();
 

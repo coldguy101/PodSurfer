@@ -1,5 +1,6 @@
 package com.credera.users;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -30,18 +31,6 @@ public class UserController {
         return result;
     }
 
-    @RequestMapping("/me")
-    public String getYourInfo(@RequestHeader HttpHeaders headers) {
-        System.out.println("Headers: " + headers);
-        return usrService.getUserInfo(headers);
-    }
-
-    @RequestMapping("/update")
-    public String updateMe(@RequestHeader HttpHeaders headers) {
-        System.out.println("Headers: " + headers);
-        return usrService.update(headers);
-    }
-
     @RequestMapping(
             value = "/create",
             method = RequestMethod.POST,
@@ -54,6 +43,27 @@ public class UserController {
         System.out.println("Response:" + result);
         return result;
     }
+
+    @RequestMapping(
+            value = "/me",
+            method = RequestMethod.GET
+    )
+    public String getYourInfo(@RequestHeader HttpHeaders headers) {
+        System.out.println("Headers: " + headers);
+        return usrService.getUserInfo(headers);
+    }
+
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.PUT,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public String updateMe(@RequestHeader HttpHeaders headers) {
+        System.out.println("Headers: " + headers);
+        return usrService.update(headers);
+    }
+
+
 
     /*@RequestMapping("/user")
     public UserModel[] getUsers() {

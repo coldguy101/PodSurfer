@@ -1,4 +1,5 @@
 export class Podcast {
+  public _id: string;
   public name: string;
   public link: string;
   public release: string;

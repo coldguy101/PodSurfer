@@ -12,19 +12,19 @@ import { PodcastService } from './podcast.service';
   providers: [ PodcastService ]
 })
 export class PodcastComponent {//implements OnInit, OnDestroy{
-  podID: number;
-  podcast: any;
+  podID: string;
+  podCast: any;
   private subscription: any;
 
   constructor(private podcastService: PodcastService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.subscription = this.route.params.subscribe(params => {
-      this.podID = +params['id']; // (+) converts string 'id' to a number
+      this.podID = params['id']; // (+) converts string 'id' to a number (would be useful someday but not today...
 
       const that = this;
       let success = function (pod: any) {
-        that.podcast = pod;
+        that.podCast = pod;
       };
 
       this.podcastService.getPodcastFromID(this.podID).then(success);

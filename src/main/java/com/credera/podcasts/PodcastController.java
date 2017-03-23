@@ -14,22 +14,29 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-
 @RequestMapping("/api/podcast")
 public class PodcastController {
 
     @Autowired
     private PodcastService podService;
 
-    @RequestMapping("/podcasts")
+    @RequestMapping(
+            value = "/all",
+            method = RequestMethod.GET
+    )
     public PodcastModel[] getPodcasts() {
         return podService.getAllPodcasts();
     }
 
-    @RequestMapping("/delete")
-    public String deletePodcast(@RequestHeader HttpHeaders headers) {
+    @RequestMapping(
+            value = "/delete/{id}",
+            method = RequestMethod.DELETE
+    )
+    public String deletePodcast(
+            @PathVariable(value="id") String id,
+            @RequestHeader HttpHeaders headers) {
         System.out.println("Headers: " + headers);
-        return podService.deleteOldPodcast(headers);
+        return podService.deletePodcast(headers, id);
     }
 
     @RequestMapping(
@@ -46,9 +53,13 @@ public class PodcastController {
         return result;
     }
 
-    @RequestMapping("/get")
-    public PodcastModel getPodcast() {
-        return podService.getPodcast();
+    @RequestMapping(
+            value = "/get/{id}",
+            method = RequestMethod.GET
+    )
+    public PodcastModel getPodcast(
+            @PathVariable(value="id") String id) {
+        return podService.getPodcast(id);
     }
 
     @RequestMapping(

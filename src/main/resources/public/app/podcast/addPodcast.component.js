@@ -9,34 +9,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-const router_1 = require('@angular/router');
 const podcast_service_1 = require('./podcast.service');
-let PodcastComponent = class PodcastComponent {
-    constructor(podcastService, route) {
+const router_1 = require("@angular/router");
+let AddPodcastComponent = class AddPodcastComponent {
+    constructor(podcastService, router) {
         this.podcastService = podcastService;
-        this.route = route;
+        this.router = router;
+        this.inputData = {};
     }
     ngOnInit() {
-        this.subscription = this.route.params.subscribe(params => {
-            this.podID = params['id'];
-            const that = this;
-            let success = function (pod) {
-                that.podCast = pod;
-            };
-            this.podcastService.getPodcastFromID(this.podID).then(success);
+    }
+    addPodcast() {
+        this.podcastService.addPodcast(this.inputData).subscribe(res => {
+            console.log(res);
+            if (res) {
+                this.router.navigate(['/podcast/' + res._id]);
+            }
+        }, error => {
+            console.log(error);
         });
     }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
 };
-PodcastComponent = __decorate([
+AddPodcastComponent = __decorate([
     core_1.Component({
-        selector: 'podcast',
-        templateUrl: './app/podcast/podcast.html',
+        selector: 'addPodcast',
+        templateUrl: './app/podcast/addPodcast.html',
         providers: [podcast_service_1.PodcastService]
     }), 
-    __metadata('design:paramtypes', [podcast_service_1.PodcastService, router_1.ActivatedRoute])
-], PodcastComponent);
-exports.PodcastComponent = PodcastComponent;
-//# sourceMappingURL=podcast.component.js.map
+    __metadata('design:paramtypes', [podcast_service_1.PodcastService, router_1.Router])
+], AddPodcastComponent);
+exports.AddPodcastComponent = AddPodcastComponent;
+//# sourceMappingURL=addPodcast.component.js.map

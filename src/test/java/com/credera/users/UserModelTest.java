@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class UserModelTest {
     private UserModel model = new UserModel();
     @Before
-    public void setup()throws Exception
+    public void setup() throws Exception
     {
         String name = "name";
         String password = "password";
@@ -27,7 +27,6 @@ public class UserModelTest {
         model.setBookmarks(bookmarks);
         model.setId(Id);
         model.setInterests(Interests);
-
     }
 
     @Test
