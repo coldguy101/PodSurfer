@@ -23,36 +23,12 @@ public class ReviewService {
         return pm;
     }
 
-    public String createNewReview(ReviewModel rev) {
+    public String createReview(HttpHeaders headers, HttpEntity<String> entity) {
         RestTemplate rt = new RestTemplate();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-       // HttpEntity<MultiValueMap<ReviewModel, String>> request = new HttpEntity<>(rev, headers);
-       // ResponseEntity<String> auth = rt.postForEntity("https://podsurfer-spring#.herokuapp.com/api/review/", request, String.class);
-
-        //System.out.println(auth.getBody());
-        //return auth.getBody();
-        return "Fail";
-    }
-
-    /*public String loginExistingUser(String email, String pass) {
-        RestTemplate rt = new RestTemplate();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
-        data.add("email", email);
-        data.add("password", pass);
-
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(data, headers);
-        ResponseEntity<String> auth = rt.postForEntity("https://podsurfer-spring3.herokuapp.com/auth/local/", request, String.class);
-
+        ResponseEntity<String> auth = rt.postForEntity("https://podsurfer-spring3.herokuapp.com/api/review/", entity, String.class);
         System.out.println(auth.getBody());
         return auth.getBody();
-    }*/
+    }
 
     public String deleteOldReview(HttpHeaders headers) {
         RestTemplate rt = new RestTemplate();
@@ -74,13 +50,11 @@ public class ReviewService {
         return res.getBody();
     }
 
-    public String updateReview(String id, HttpHeaders headers, MultiValueMap<String, String> body) {
+    public String updateReview(HttpHeaders headers, HttpEntity<String> entity, String id) {
         RestTemplate rt = new RestTemplate();
 
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
-        //HttpEntity<HttpHeaders> head = new HttpEntity<>(headers);
-
-        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/review/" + id, HttpMethod.PUT, request, String.class);
+        rt.put("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, entity);
+        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/review/" + id, HttpMethod.PUT, entity, String.class);
 
         return res.getBody();
     }

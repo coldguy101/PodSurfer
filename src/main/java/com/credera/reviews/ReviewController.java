@@ -1,6 +1,7 @@
 package com.credera.reviews;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.util.MultiValueMap;
@@ -23,29 +24,17 @@ public class ReviewController {
     }
 
     @RequestMapping(
-            value = "/create/",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
-    )
-    @ResponseBody
-    public String createReview(ReviewModel review) {
-        String result = revService.createNewReview(review);
-        System.out.println("Response: " + result);
-        return result;
-
-    }
-
-    /*@RequestMapping(
             value = "/create",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
-    public @ResponseBody String createUser(UserModel user) {
-        System.out.println("Email: " + user.getEmail() + " Pass: " + user.getPassword());
-        String result = usrService.createUser(user.getName(), user.getEmail(), user.getPassword());
+    public @ResponseBody String createNewReview(
+            @RequestHeader HttpHeaders headers,
+            HttpEntity<String> entity){
+        String result = revService.createReview(headers, entity);
         System.out.println("Response:" + result);
         return result;
-    }*/
+    }
 
     @RequestMapping("/delete")
     public String deleteReview(@RequestHeader HttpHeaders headers) {
@@ -62,15 +51,15 @@ public class ReviewController {
     @RequestMapping(
             value = "/update/{id}",
             method = RequestMethod.PUT,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+            consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public String updateReview(
             @PathVariable(value="id") String id,
             @RequestHeader HttpHeaders headers,
-            @RequestBody MultiValueMap<String, String> bod) {
-        System.out.println("Headers: " + headers);
-        System.out.println("id: " + id);
-        System.out.println("body: bod");
-        return revService.updateReview(id, headers, bod);
+            HttpEntity<String> entity) {
+
+        String result = revService.updateReview(headers, entity, id);
+        System.out.println("Response:" + result);
+        return result;
     }
 }

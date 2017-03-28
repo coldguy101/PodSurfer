@@ -66,14 +66,14 @@ public class PodcastController {
     @RequestMapping(
             value = "/update/{id}",
             method = RequestMethod.PUT,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+            consumes = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
     public String updatePodcast(
             @PathVariable(value="id") String id,
             @RequestHeader HttpHeaders headers,
             HttpEntity<String> entity) {
-        System.out.println("ID: " + id);
+
         String result = podService.updatePodcast(headers, entity, id);
         System.out.println("Response:" + result);
         return result;

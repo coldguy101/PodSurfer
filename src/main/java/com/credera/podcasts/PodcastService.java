@@ -36,22 +36,12 @@ public class PodcastService {
         return auth.getBody();
     }
 
-
     public String updatePodcast(HttpHeaders headers, HttpEntity<String> entity, String id) {
         RestTemplate rt = new RestTemplate();
 
         rt.put("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, entity);
-
-
         ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, HttpMethod.PUT, entity, String.class);
 
-        //("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, HttpMethod.PUT, entity, String.class);
-
-        System.out.println("asdfasdfasdfasfasdfasdfasdfasf: IDDDDD:    " + id);
-
-        System.out.println("BODYYYYYYY:     " + entity.getBody());
-
-        //return res.getBody();
         return res.getBody();
     }
 

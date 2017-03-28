@@ -1,11 +1,9 @@
 package com.credera.users;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -56,18 +54,13 @@ public class UserController {
     @RequestMapping(
             value = "/update",
             method = RequestMethod.PUT,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+            consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public String updateMe(@RequestHeader HttpHeaders headers) {
-        System.out.println("Headers: " + headers);
-        return usrService.update(headers);
+    public String updateMe(
+            @RequestHeader HttpHeaders headers,
+            HttpEntity<String> entity) {
+        String result = usrService.update(headers, entity);
+        System.out.println("Response:" + result);
+        return result;
     }
-
-
-
-    /*@RequestMapping("/user")
-    public UserModel[] getUsers() {
-        return usrService.getAllUsers();
-    }*/
-
 }

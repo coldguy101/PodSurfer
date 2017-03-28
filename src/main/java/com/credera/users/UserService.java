@@ -51,13 +51,20 @@ public class UserService {
         return res.getBody();
     }
 
-    public String update(HttpHeaders headers) {
+    public String update(HttpHeaders headers, HttpEntity<String> entity) {
         RestTemplate rt = new RestTemplate();
 
-        HttpEntity<HttpHeaders> head = new HttpEntity<>(headers);
-
-        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/user/", HttpMethod.PUT, head, String.class);
+        rt.put("https://podsurfer-spring3.herokuapp.com/api/user/", entity);
+        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/user/", HttpMethod.PUT, entity, String.class);
 
         return res.getBody();
     }
+    /*public String updateReview(HttpHeaders headers, HttpEntity<String> entity, String id) {
+        RestTemplate rt = new RestTemplate();
+
+        rt.put("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, entity);
+        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, HttpMethod.PUT, entity, String.class);
+
+        return res.getBody();
+    }*/
 }
