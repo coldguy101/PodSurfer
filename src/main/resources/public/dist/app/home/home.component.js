@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = require('@angular/core');
 const home_service_1 = require('./home.service');
 const podcast_service_1 = require("../podcast/podcast.service");
+const login_service_1 = require('../login/login.service');
 let HomeComponent = class HomeComponent {
-    constructor(homeService, podcastService) {
+    constructor(homeService, podcastService, loginService) {
         this.homeService = homeService;
         this.podcastService = podcastService;
+        this.loginService = loginService;
         this.welcome = "Search for Podcasts!";
         this.zen = "Temporary";
     }
@@ -23,7 +25,10 @@ let HomeComponent = class HomeComponent {
         let success = function (podcasts) {
             that.recommendedPodcasts = podcasts;
         };
-        this.podcastService.getAllPodcasts().then(success);
+        if (this.loginService.isLoggedIn())
+            this.podcastService.getMyRecommendedPodcasts().then(success);
+        else
+            this.podcastService.getAllPodcasts().then(success);
     }
 };
 HomeComponent = __decorate([
@@ -32,7 +37,7 @@ HomeComponent = __decorate([
         templateUrl: './app/home/home.html',
         providers: [home_service_1.HomeService, podcast_service_1.PodcastService]
     }), 
-    __metadata('design:paramtypes', [home_service_1.HomeService, podcast_service_1.PodcastService])
+    __metadata('design:paramtypes', [home_service_1.HomeService, podcast_service_1.PodcastService, login_service_1.LoginService])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

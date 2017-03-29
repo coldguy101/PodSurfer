@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 import { PodcastService } from "../podcast/podcast.service";
+import { LoginService } from '../login/login.service';
 
 @Component ({
     selector: 'home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
     search: string;
     zen: string;
 
-    constructor(private homeService: HomeService, private podcastService: PodcastService) {
+    constructor(private homeService: HomeService, private podcastService: PodcastService, private loginService: LoginService) {
         this.welcome = "Search for Podcasts!";
         this.zen = "Temporary";
     }
@@ -26,7 +27,10 @@ export class HomeComponent implements OnInit {
             that.recommendedPodcasts = podcasts;
         };
 
-        this.podcastService.getAllPodcasts().then(success);
+        if(this.loginService.isLoggedIn())
+            this.podcastService.getMyRecommendedPodcasts().then(success);
+        else
+            this.podcastService.getAllPodcasts().then(success);
     }
 
     /*ngOnInit() {

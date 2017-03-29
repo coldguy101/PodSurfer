@@ -8,6 +8,15 @@ export class PodcastService {
 
   constructor(private http: Http, private loginService: LoginService) {}
 
+  getMyRecommendedPodcasts() {
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + this.loginService.getToken());
+    return this.http.get("/api/user/recommended", {headers: headers})
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError);
+  }
+
   getPodcastFromID(id: string) {
     return this.http.get("/api/podcast/get/" + id)
       .toPromise()
