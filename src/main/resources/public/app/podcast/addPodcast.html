@@ -1,40 +1,43 @@
-<form (ngSubmit)="addPodcast()">
-    <div class="form-group row">
-        <label for="podcast-name" class="col-2 col-form-label">Name</label>
-        <div class="col-6">
-            <input class="form-control" name="name" [(ngModel)]="inputData.name" type="text" placeholder="My Podcast" id="podcast-name" required autofocus>
+<div class ="container">
+    <form (ngSubmit)="addPodcast()">
+        <div class="form-group row">
+            <label for="podcast-name" class="col-2 col-form-label">Name</label>
+            <div class="col-3">
+                <input class="form-control" name="name" [(ngModel)]="inputData.name" type="text" placeholder="My Podcast" id="podcast-name" required autofocus>
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <label for="podcast-link" class="col-2 col-form-label">Link</label>
-        <div class="col-6">
-            <input class="form-control" name="link" [(ngModel)]="inputData.link" type="url" placeholder="http://somesite.com/my-podcast" id="podcast-link">
+        <div class="form-group row">
+            <label for="podcast-link" class="col-2 col-form-label">Link</label>
+            <div class="col-6">
+                <input class="form-control" name="link" [(ngModel)]="inputData.link" type="url" placeholder="http://somesite.com/my-podcast" id="podcast-link">
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <label for="podcast-release" class="col-2 col-form-label">Release</label>
-        <div class="col-6">
-            <input class="form-control" name="release" [(ngModel)]="inputData.release" type="text" placeholder="Release" id="podcast-release">
+        <div class="form-group row">
+            <label for="podcast-release" class="col-2 col-form-label">Release</label>
+            <div class="col-6">
+                <input class="form-control" name="release" [(ngModel)]="inputData.release" type="text" placeholder="Release" id="podcast-release">
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <label for="podcast-prod" class="col-2 col-form-label">Producer</label>
-        <div class="col-6">
-            <input class="form-control" name="producer" [(ngModel)]="inputData.producer" type="text" placeholder="Michael Bay" id="podcast-prod">
+        <div class="form-group row">
+            <label for="podcast-prod" class="col-2 col-form-label">Producer</label>
+            <div class="col-6">
+                <input class="form-control" name="producer" [(ngModel)]="inputData.producer" type="text" placeholder="Michael Bay" id="podcast-prod">
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <label for="podcast-len" class="col-2 col-form-label">Length</label>
-        <div class="col-6">
-            <input class="form-control" name="length" [(ngModel)]="inputData.length" type="number" placeholder="300" id="podcast-len">
+        <div class="form-group row">
+            <label for="podcast-len" class="col-2 col-form-label">Length</label>
+            <div class="col-6">
+                <input class="form-control" name="length" [(ngModel)]="inputData.length" type="number" placeholder="300" id="podcast-len">
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <label for="podcast-desc" class="col-2 col-form-label">Description</label>
-        <div class="col-6">
-            <input class="form-control" name="desc" [(ngModel)]="inputData.description" type="text" placeholder="This podcast is about..." id="podcast-desc">
-        </div>
-    </div>
+        <div class="form-group row">
+            <label for="podcast-desc" class="col-2 col-form-label">Description</label>
+            <div class="col-6">
+                <textarea class="form-control" rows="5" name="desc" [(ngModel)]="inputData.description" type="text" placeholder="This podcast is about..." id="podcast-desc"></textarea>
+            </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

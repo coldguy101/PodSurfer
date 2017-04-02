@@ -10,13 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 let FilterPipe = class FilterPipe {
-    transform(items, field, value) {
-        let theItems = [];
+    transform(items, fields, value) {
         if (!items)
             return [];
-        if (!field || !value)
+        if (!fields || !value)
             return items;
-        return items.filter(it => it[field].toLowerCase().includes(value.toLowerCase()));
+        return items.filter(it => it[fields].toLowerCase().includes(value.toLowerCase()));
     }
 };
 FilterPipe = __decorate([

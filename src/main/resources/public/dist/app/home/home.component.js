@@ -29,7 +29,7 @@ let HomeComponent = class HomeComponent {
 HomeComponent = __decorate([
     core_1.Component({
         selector: 'home',
-        templateUrl: './app/home/home.html',
+        templateUrl: '../../../app/home/home.html',
         providers: [home_service_1.HomeService, podcast_service_1.PodcastService]
     }), 
     __metadata('design:paramtypes', [home_service_1.HomeService, podcast_service_1.PodcastService])

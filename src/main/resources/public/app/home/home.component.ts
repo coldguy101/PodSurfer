@@ -5,6 +5,7 @@ import { PodcastService } from "../podcast/podcast.service";
 @Component ({
     selector: 'home',
     templateUrl: './app/home/home.html',
+    styleUrls: ['./app/home/home.css'],
     providers: [ HomeService, PodcastService ]
 })
 export class HomeComponent implements OnInit {

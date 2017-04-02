@@ -30,6 +30,7 @@ HomeComponent = __decorate([
     core_1.Component({
         selector: 'home',
         templateUrl: './app/home/home.html',
+        styleUrls: ['./app/home/home.css'],
         providers: [home_service_1.HomeService, podcast_service_1.PodcastService]
     }), 
     __metadata('design:paramtypes', [home_service_1.HomeService, podcast_service_1.PodcastService])
