@@ -32,14 +32,15 @@ public class ReviewController {
             @RequestHeader HttpHeaders headers,
             HttpEntity<String> entity){
         String result = revService.createReview(headers, entity);
-        System.out.println("Response:" + result);
         return result;
     }
 
     @RequestMapping("/delete")
-    public String deleteReview(@RequestHeader HttpHeaders headers) {
-        System.out.println("Headers: " + headers);
-        return revService.deleteOldReview(headers);
+    public String deleteReview(
+            @PathVariable(value="id") String id,
+            @RequestHeader HttpHeaders headers) {
+        String result = revService.deleteOldReview(headers, id);
+        return result;
     }
 
     @RequestMapping("/getMy")
@@ -57,7 +58,6 @@ public class ReviewController {
             @PathVariable(value="id") String id,
             @RequestHeader HttpHeaders headers,
             HttpEntity<String> entity) {
-
         String result = revService.updateReview(headers, entity, id);
         System.out.println("Response:" + result);
         return result;
