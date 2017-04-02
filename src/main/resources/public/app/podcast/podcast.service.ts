@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import {Http, Headers, RequestOptions} from '@angular/http';
 import {LoginService} from '../login/login.service';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class PodcastService {
+  private options: RequestOptions;
 
   constructor(private http: Http, private loginService: LoginService) {}
 
@@ -110,12 +111,12 @@ export class PodcastService {
 
   rmPodcast(id: string) {
     let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization', 'Bearer ' + this.loginService.getToken());
+    this.options = new RequestOptions({ headers: headers });
     console.log("Headers: " + headers);
     console.log("ID to del: " + id);
     return this.http
-      .delete('/api/podcast/delete/' + id, {headers: headers})
+      .delete('/api/podcast/delete/' + id, this.options)
       .map(res => res.json())
       .map(res => {
         console.log("Podcast Service Delete: " + res);
