@@ -1,5 +1,6 @@
 package com.credera.users;
 
+import com.credera.podcasts.PodcastModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -58,4 +59,15 @@ public class UserController {
         String result = usrService.update(headers, entity);
         return result;
     }
+
+    @RequestMapping(
+            value = "/recommended",
+            method = RequestMethod.GET
+    )
+    public PodcastModel[] recommendedPodcasts(
+            @RequestHeader HttpHeaders headers) {
+        System.out.println("Got Here:" + headers);
+        return usrService.recommended(headers);
+    }
+
 }
