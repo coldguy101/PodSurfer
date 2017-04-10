@@ -36,6 +36,7 @@ let LoginComponent = class LoginComponent {
         this.loginService.login(this.model.email, this.model.password).subscribe(res => {
             if (res) {
                 this.router.navigate(['/']);
+                window.location.reload();
             }
         }, error => {
             console.log(error);

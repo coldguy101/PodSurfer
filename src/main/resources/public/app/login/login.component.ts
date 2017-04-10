@@ -41,6 +41,7 @@ export class LoginComponent {
         //console.log(res);
         if (res) {
           this.router.navigate(['/']);
+          window.location.reload();
         }
       },
       error => {
