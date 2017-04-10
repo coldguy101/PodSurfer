@@ -23,8 +23,7 @@ let PodcastsComponent = class PodcastsComponent {
         this.podcastService.getAllPodcasts().then(success);
     }
     rmPodcast(id) {
-        console.log("RmPodcast Pushed on ID: " + id);
-        delete this.podcasts[id];
+        delete this.podcasts.filter((myObj) => myObj._id === id)[0];
         this.podcastService.rmPodcast(id);
     }
 };

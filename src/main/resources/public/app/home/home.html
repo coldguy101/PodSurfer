@@ -7,7 +7,7 @@
 
     <input class="mdl-textfield--full-width" title="Search Podcasts..." type="text" [(ngModel)]="search">
 
-    <div *ngFor="let podcast of recommendedPodcasts | filter : 'description' : search | filter : 'name' : search" class="col-md-4">
+    <div *ngFor="let podcast of recommendedPodcasts | filter : 'name' : search" class="col-md-4">
         <div class="well">
             <h4 class="">{{podcast.name}}</h4>
             <h6 class="">{{podcast.description}}</h6>

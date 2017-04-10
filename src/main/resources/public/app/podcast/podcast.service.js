@@ -53,15 +53,13 @@ let PodcastService = class PodcastService {
     }
     rmPodcast(id) {
         let headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
         headers.append('Authorization', 'Bearer ' + this.loginService.getToken());
-        console.log("Headers: " + headers);
+        let options = new http_1.RequestOptions({ headers: headers });
         console.log("ID to del: " + id);
-        return this.http
-            .delete('/api/podcast/delete/' + id, { headers: headers })
-            .map(res => res.json())
-            .map(res => {
-            console.log("Podcast Service Delete: " + res);
-            return res;
+        console.log("url: /api/podcast/delete/" + id);
+        this.http.delete('/api/podcast/delete/' + id, options).subscribe(res => {
+            console.log(res);
         });
     }
     encode(src) {

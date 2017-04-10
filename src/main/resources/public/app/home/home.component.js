@@ -21,6 +21,12 @@ let HomeComponent = class HomeComponent {
         this.zen = "Temporary";
     }
     ngOnInit() {
+        this.loggedIn = this.loginService.isLoggedIn();
+        this.renderPodcasts();
+    }
+    ngDoCheck() {
+    }
+    renderPodcasts() {
         let that = this;
         let success = function (podcasts) {
             that.recommendedPodcasts = podcasts;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 import { PodcastService } from "../podcast/podcast.service";
 import { LoginService } from '../login/login.service';
@@ -8,12 +8,13 @@ import { LoginService } from '../login/login.service';
     templateUrl: './app/home/home.html',
     providers: [ HomeService, PodcastService ]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, DoCheck {
 
     welcome: string;
     recommendedPodcasts: any;
     search: string;
     zen: string;
+    loggedIn: boolean;
 
     constructor(private homeService: HomeService, private podcastService: PodcastService, private loginService: LoginService) {
         this.welcome = "Search for Podcasts!";
@@ -21,6 +22,17 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.loggedIn = this.loginService.isLoggedIn();
+        this.renderPodcasts();
+    }
+
+    ngDoCheck() {
+        // if(this.loggedIn !== this.loginService.isLoggedIn()) {
+        //     this.renderPodcasts();
+        // }
+    }
+
+    renderPodcasts() {
         let that = this;
 
         let success = function (podcasts: any) {

@@ -24,8 +24,7 @@ export class PodcastsComponent implements OnInit{
   }
 
   rmPodcast(id: string) {
-    console.log("RmPodcast Pushed on ID: " + id);
-    delete this.podcasts[id];
+    delete this.podcasts.filter((myObj: any) => myObj._id === id)[0];  //Not sure why this isnt working...
     this.podcastService.rmPodcast(id);
   }
 }

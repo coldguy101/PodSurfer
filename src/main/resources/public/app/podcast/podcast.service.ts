@@ -111,17 +111,23 @@ export class PodcastService {
 
   rmPodcast(id: string) {
     let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization', 'Bearer ' + this.loginService.getToken());
-    this.options = new RequestOptions({ headers: headers });
-    console.log("Headers: " + headers);
+    let options = new RequestOptions({ headers: headers });
+    //console.log("Headers: " + headers);
     console.log("ID to del: " + id);
-    return this.http
-      .delete('/api/podcast/delete/' + id, this.options)
-      .map(res => res.json())
-      .map(res => {
-        console.log("Podcast Service Delete: " + res);
-        return res;
-      });
+    console.log("url: /api/podcast/delete/"+id);
+
+    this.http.delete('/api/podcast/delete/' + id, options).subscribe(res => {
+      console.log(res);
+    });
+    // return this.http
+    //   .delete('/api/podcast/delete/' + id, options)
+    //   .map(res => res.json())
+    //   .map(res => {
+    //     console.log("Podcast Service Delete: " + res);
+    //     return res;
+    //   });
   }
 
   private encode(src: any){

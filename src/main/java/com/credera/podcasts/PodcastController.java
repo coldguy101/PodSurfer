@@ -35,6 +35,7 @@ public class PodcastController {
     public String deletePodcast(
             @PathVariable(value="id") String id,
             @RequestHeader HttpHeaders headers) {
+        System.out.println("DELETE REQUESTED");
         String result = podService.deletePodcast(headers, id);
         return result;
     }
