@@ -12,16 +12,16 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PodcastModel {
 
-    private String _id = "Empty";
-    private String name = "Empty";
-    private String link = "Empty";
+    private String _id;
+    private String name;
+    private String link;
     private Date release;
-    private String producer = "Empty";
-    private String length = "Empty";
-    private String description = "Empty";
+    private String producer;
+    private String length;
+    private String description;
     private Object[] episodes;
     private String[] tags;
-    private String imageURL = "Empty";
+    private String imageURL;
 
     public String get_id() {
         return _id;

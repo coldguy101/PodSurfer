@@ -22,9 +22,9 @@ let PodcastsComponent = class PodcastsComponent {
         };
         this.podcastService.getAllPodcasts().then(success);
     }
-    rmPodcast(id) {
-        delete this.podcasts.filter((myObj) => myObj._id === id)[0];
-        this.podcastService.rmPodcast(id);
+    rmPodcast(pcast) {
+        delete this.podcasts[this.podcasts.indexOf(pcast)];
+        this.podcastService.rmPodcast(pcast._id);
     }
 };
 PodcastsComponent = __decorate([

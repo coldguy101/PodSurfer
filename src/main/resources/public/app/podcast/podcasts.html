@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let podcast of podcasts | filter : 'name' : selection">
-                    <td>{{ podcast.name }}</td>
+                    <td><a [routerLink]="'/podcast/' + podcast._id">{{ podcast.name }}</a></td>
                     <td>{{ podcast.producer }}</td>
                     <td>{{ podcast.description }}</td>
                     <td>{{ podcast.length }}</td>
@@ -34,13 +34,13 @@
                             <!--{{ tag }},-->
                         <!--</span>-->
                     <!--</td>-->
-                    <td *ngIf="podcast.link === 'Empty' || podcast.link === ''">
+                    <td *ngIf="!podcast.link">
                         <a class="btn btn-warning" disabled>Unavailable</a>
                     </td>
-                    <td *ngIf="podcast.link !== 'Empty' || podcast.link !== ''">
+                    <td *ngIf="podcast.link">
                         <a href="{{ podcast.link }}" class="btn btn-primary">Get Podcast</a>
                     </td>
-                    <td><button class="btn btn-danger" (click)="rmPodcast(podcast._id)">Delete</button></td>
+                    <td><button class="btn btn-danger" (click)="rmPodcast(podcast)">Delete</button></td>
                 </tr>
             </tbody>
         </table>

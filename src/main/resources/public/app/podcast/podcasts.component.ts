@@ -23,8 +23,8 @@ export class PodcastsComponent implements OnInit{
     this.podcastService.getAllPodcasts().then(success);
   }
 
-  rmPodcast(id: string) {
-    delete this.podcasts.filter((myObj: any) => myObj._id === id)[0];  //Not sure why this isnt working...
-    this.podcastService.rmPodcast(id);
+  rmPodcast(pcast: any) {
+    delete this.podcasts[this.podcasts.indexOf(pcast)];
+    this.podcastService.rmPodcast(pcast._id);
   }
 }
