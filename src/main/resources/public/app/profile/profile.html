@@ -1,10 +1,86 @@
-<div class="jumbotron">
-    <p>{{ message }}</p>
-    <p *ngIf="user">Your user ID is: {{ user._id }}</p>
-    <p *ngIf="user">Your user Name is: {{ user.name }} </p>
-    <p *ngIf="user">Your user Email is: {{ user.email }}</p>
-    <div *ngIf="user">
-        <p>Your interests are the following: </p>
-        <p *ngFor="let interest of user.interests">{{interest}}</p>
+<div class="container">
+    <!--<p *ngIf="user">Your user ID is: {{ user._id }}</p>-->
+    <!--<p *ngIf="user">Your user Name is: {{ user.name }} </p>-->
+    <!--<p *ngIf="user">Your user Email is: {{ user.email }}</p>-->
+    <!--<div *ngIf="user">-->
+        <!--<p>Your interests are the following: </p>-->
+        <!--<p *ngFor="let interest of user.interests">{{interest}}</p>-->
+    <!--</div>-->
+
+    <!--
+    <form (ngSubmit)="updateProfile()">
+        <div class="form-group">
+            <label for="userName">Username</label>
+            <input class="form-control" id="userName" type="text" [(ngModel)]="formData.username" value="{{user?.name}}">
+        </div>
+        <div class="form-group">
+            <label for="userEmail">Email address</label>
+            <input class="form-control" id="userEmail" type="email" value="{{user?.email}}">
+        </div>
+        <div class="form-group">
+            <label for="userPassword">Password</label>
+            <input class="form-control" id="userPassword" type="password" placeholder="{{user?.password}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="userInterests">Your Interests:</label>
+            <input class="form-control" id="userInterests" type="text" placeholder="">
+        </div>
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+    </form>
+    -->
+
+    <form (ngSubmit)="updateProfile()">
+        <div class="form-group">
+            <label for="userName">Username</label>
+            <input class="form-control" id="userName" type="text" [(ngModel)]="user.name" value="{{user?.name}}">
+        </div>
+        <div class="form-group">
+            <label for="userEmail">Email address</label>
+            <input class="form-control" id="userEmail" type="email" [(ngModel)]="user.email" value="{{user?.email}}">
+        </div>
+        <div class="form-group">
+            <label for="userPassword">Password</label>
+            <input class="form-control" id="userPassword" type="password" [(ngModel)]="user.password" value="{{user?.password}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="userInterests">Your Interests:</label>
+            <input class="form-control" id="userInterests" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+    </form>
+
+    <hr/>
+
+    <h5>Bookmarks:</h5>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Producer</th>
+                <th>Description</th>
+                <th>Length</th>
+                <!--<th>Tags</th>-->
+                <th>Link</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let podcast of bookmarked | filter : 'name' : selection">
+                <td><a [routerLink]="'/podcast/' + podcast._id">{{ podcast.name }}</a></td>
+                <td>{{ podcast.producer }}</td>
+                <td>{{ podcast.description }}</td>
+                <td>{{ podcast.length }}</td>
+                <td *ngIf="!podcast.link">
+                    <a class="btn btn-warning" disabled>Unavailable</a>
+                </td>
+                <td *ngIf="podcast.link">
+                    <a href="{{ podcast.link }}" class="btn btn-primary">Get Podcast</a>
+                </td>
+                <td><button class="btn btn-danger" (click)="rmPodcast(podcast)">Delete</button></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
