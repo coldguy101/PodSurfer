@@ -1,3 +1,18 @@
 .podsearch {
     margin-bottom: 20px;
 }
+.title
+{
+    color: #000000;
+}
+
+.truncate {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pod{
+    height: 200px;
+}
