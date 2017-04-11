@@ -1,29 +1,67 @@
-<div class="jumbotron">
+<div class="container">
     <p>{{ message }}</p>
 
     <input type="text" [(ngModel)]="selection">
 
     <!--<p>{{ selection }}</p>-->
 
-    <ul class="mdl-list">
+    <!-- Print all the podcasts in json format-->
+    <!--<div *ngFor="let podcast of podcasts">-->
+        <!--{{ podcast | json }}-->
+    <!--</div>-->
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Producer</th>
+                    <th>Description</th>
+                    <th>Length</th>
+                    <!--<th>Tags</th>-->
+                    <th>Link</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let podcast of podcasts | filter : 'name' : selection">
+                    <td><a [routerLink]="'/podcast/' + podcast._id">{{ podcast.name }}</a></td>
+                    <td>{{ podcast.producer }}</td>
+                    <td>{{ podcast.description }}</td>
+                    <td>{{ podcast.length }}</td>
+                    <!--<td *ngIf="podcast.tags">-->
+                        <!--<span *ngFor="let tag of {{ podcast.tags }}">-->
+                            <!--{{ tag }},-->
+                        <!--</span>-->
+                    <!--</td>-->
+                    <td *ngIf="!podcast.link">
+                        <a class="btn btn-warning" disabled>Unavailable</a>
+                    </td>
+                    <td *ngIf="podcast.link">
+                        <a href="{{ podcast.link }}" class="btn btn-primary">Get Podcast</a>
+                    </td>
+                    <td><button class="btn btn-danger" (click)="rmPodcast(podcast)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--<ul class="mdl-list">
         <li *ngFor="let podcast of podcasts | filter : 'name' : selection"
             class="mdl-list__item mdl-list__item--three-line">
             <span class="mdl-list__item-primary-content">
-                <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+                <!--<i class="material-icons mdl-list__item-avatar">person</i>
                 <a [routerLink]="['/podcast/' + podcast._id]">{{ podcast.name }}</a>
                 <span class="mdl-list__item-text-body">
                     {{ podcast.description }}
                     <button class="btn-danger" (click)="rmPodcast(podcast._id)">Delete</button>
                 </span>
-
-
-
             </span>
             <span class="mdl-list__item-secondary-content">
                 <a class="mdl-list__item-secondary-action" href="#">
-                    <!--<i class="material-icons">star</i>-->
+                    <!--<i class="material-icons">star</i>
                 </a>
             </span>
         </li>
-    </ul>
+    </ul>-->
 </div>

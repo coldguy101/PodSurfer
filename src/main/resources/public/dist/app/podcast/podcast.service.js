@@ -17,6 +17,14 @@ let PodcastService = class PodcastService {
         this.http = http;
         this.loginService = loginService;
     }
+    getMyRecommendedPodcasts() {
+        let headers = new http_1.Headers();
+        headers.append('Authorization', 'Bearer ' + this.loginService.getToken());
+        return this.http.get("/api/user/recommended", { headers: headers })
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError);
+    }
     getPodcastFromID(id) {
         return this.http.get("/api/podcast/get/" + id)
             .toPromise()

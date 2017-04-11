@@ -30,32 +30,24 @@ public class ReviewService {
         return auth.getBody();
     }
 
-    public String deleteOldReview(HttpHeaders headers) {
+    public String deleteOldReview(HttpHeaders headers, String id) {
         RestTemplate rt = new RestTemplate();
-
-        HttpEntity<HttpHeaders> head = new HttpEntity<>(headers);
-
-        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/review/:id", HttpMethod.DELETE, head, String.class);
-
+        HttpEntity request = new HttpEntity(headers);
+        HttpEntity<String> res =  rt.exchange("https://podsurfer-spring3.herokuapp.com/api/review/" + id, HttpMethod.DELETE, request, String.class);
         return res.getBody();
     }
 
     public String getMyReviews(HttpHeaders headers) {
         RestTemplate rt = new RestTemplate();
-
         HttpEntity<HttpHeaders> head = new HttpEntity<>(headers);
-
         ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/review/mine", HttpMethod.GET, head, String.class);
-
         return res.getBody();
     }
 
     public String updateReview(HttpHeaders headers, HttpEntity<String> entity, String id) {
         RestTemplate rt = new RestTemplate();
-
         rt.put("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, entity);
         ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/review/" + id, HttpMethod.PUT, entity, String.class);
-
         return res.getBody();
     }
 }

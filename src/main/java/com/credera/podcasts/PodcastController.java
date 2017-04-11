@@ -35,9 +35,9 @@ public class PodcastController {
     public String deletePodcast(
             @PathVariable(value="id") String id,
             @RequestHeader HttpHeaders headers) {
-        System.out.println("Headers: " + headers);
-        System.out.println("Got delete request on id: " + id);
-        return podService.deletePodcast(headers, id);
+        System.out.println("DELETE REQUESTED");
+        String result = podService.deletePodcast(headers, id);
+        return result;
     }
 
     @RequestMapping(
@@ -49,8 +49,7 @@ public class PodcastController {
     public String createNewPodcast(
             @RequestHeader HttpHeaders headers,
             HttpEntity<String> entity) {
-        String result = podService.createPodcast(headers, entity);
-        System.out.println("Response:" + result);
+        String result = podService.createPodcast(entity);
         return result;
     }
 
@@ -73,25 +72,7 @@ public class PodcastController {
             @PathVariable(value="id") String id,
             @RequestHeader HttpHeaders headers,
             HttpEntity<String> entity) {
-
-        String result = podService.updatePodcast(headers, entity, id);
-        System.out.println("Response:" + result);
+        String result = podService.updatePodcast(entity, id);
         return result;
     }
-
-    /* @RequestMapping(
-            value = "/update/{id}",
-            method = RequestMethod.PUT,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
-    )
-    public String updateReview(
-            @PathVariable(value="id") String id,
-            @RequestHeader HttpHeaders headers,
-            @RequestBody MultiValueMap<String, String> bod) {
-        System.out.println("Headers: " + headers);
-        System.out.println("id: " + id);
-        System.out.println("body: bod");
-        return revService.updateReview(id, headers, bod);
-    }*/
-
 }

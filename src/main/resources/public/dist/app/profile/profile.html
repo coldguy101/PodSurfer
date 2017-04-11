@@ -3,4 +3,8 @@
     <p *ngIf="user">Your user ID is: {{ user._id }}</p>
     <p *ngIf="user">Your user Name is: {{ user.name }} </p>
     <p *ngIf="user">Your user Email is: {{ user.email }}</p>
+    <div *ngIf="user">
+        <p>Your interests are the following: </p>
+        <p *ngFor="let interest of user.interests">{{interest}}</p>
+    </div>
 </div>

@@ -1,5 +1,6 @@
 package com.credera.users;
 
+import com.credera.podcasts.PodcastModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,9 +24,7 @@ public class UserController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
     public @ResponseBody String login(UserModel user) {
-        System.out.println("Email: " + user.getEmail() + " Pass: " + user.getPassword());
         String result = usrService.loginExistingUser(user.getEmail(), user.getPassword());
-        System.out.println("Response: " + result);
         return result;
     }
 
@@ -38,7 +37,6 @@ public class UserController {
             @RequestHeader HttpHeaders headers,
             HttpEntity<String> entity) {
         String result = usrService.createUser(headers, entity);
-        System.out.println("Response:" + result);
         return result;
     }
 
@@ -47,7 +45,6 @@ public class UserController {
             method = RequestMethod.GET
     )
     public String getYourInfo(@RequestHeader HttpHeaders headers) {
-        System.out.println("Headers: " + headers);
         return usrService.getUserInfo(headers);
     }
 
@@ -60,7 +57,17 @@ public class UserController {
             @RequestHeader HttpHeaders headers,
             HttpEntity<String> entity) {
         String result = usrService.update(headers, entity);
-        System.out.println("Response:" + result);
         return result;
     }
+
+    @RequestMapping(
+            value = "/recommended",
+            method = RequestMethod.GET
+    )
+    public PodcastModel[] recommendedPodcasts(
+            @RequestHeader HttpHeaders headers) {
+        System.out.println("Got Here:" + headers);
+        return usrService.recommended(headers);
+    }
+
 }

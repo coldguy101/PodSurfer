@@ -1,12 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import {Http, Headers, RequestOptions} from '@angular/http';
 import {LoginService} from '../login/login.service';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class PodcastService {
+  private options: RequestOptions;
 
   constructor(private http: Http, private loginService: LoginService) {}
+
+  getMyRecommendedPodcasts() {
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + this.loginService.getToken());
+    return this.http.get("/api/user/recommended", {headers: headers})
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError);
+  }
 
   getPodcastFromID(id: string) {
     return this.http.get("/api/podcast/get/" + id)
@@ -103,15 +113,21 @@ export class PodcastService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization', 'Bearer ' + this.loginService.getToken());
-    console.log("Headers: " + headers);
+    let options = new RequestOptions({ headers: headers });
+    //console.log("Headers: " + headers);
     console.log("ID to del: " + id);
-    return this.http
-      .delete('/api/podcast/delete/' + id, {headers: headers})
-      .map(res => res.json())
-      .map(res => {
-        console.log("Podcast Service Delete: " + res);
-        return res;
-      });
+    console.log("url: /api/podcast/delete/"+id);
+
+    this.http.delete('/api/podcast/delete/' + id, options).subscribe(res => {
+      console.log(res);
+    });
+    // return this.http
+    //   .delete('/api/podcast/delete/' + id, options)
+    //   .map(res => res.json())
+    //   .map(res => {
+    //     console.log("Podcast Service Delete: " + res);
+    //     return res;
+    //   });
   }
 
   private encode(src: any){

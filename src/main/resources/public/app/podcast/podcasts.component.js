@@ -22,10 +22,9 @@ let PodcastsComponent = class PodcastsComponent {
         };
         this.podcastService.getAllPodcasts().then(success);
     }
-    rmPodcast(id) {
-        console.log("RmPodcast Pushed on ID: " + id);
-        delete this.podcasts[id];
-        this.podcastService.rmPodcast(id);
+    rmPodcast(pcast) {
+        delete this.podcasts[this.podcasts.indexOf(pcast)];
+        this.podcastService.rmPodcast(pcast._id);
     }
 };
 PodcastsComponent = __decorate([

@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.lang.model.type.NullType;
+import javax.validation.constraints.Null;
+
 /**
  * Created by sean on 2/14/17.
  */
@@ -29,14 +32,14 @@ public class PodcastService {
         return pm;
     }
 
-    public String createPodcast(HttpHeaders headers, HttpEntity<String> entity) {
+    public String createPodcast(HttpEntity<String> entity) {
         RestTemplate rt = new RestTemplate();
         ResponseEntity<String> auth = rt.postForEntity("https://podsurfer-spring3.herokuapp.com/api/podcast/", entity, String.class);
         System.out.println(auth.getBody());
         return auth.getBody();
     }
 
-    public String updatePodcast(HttpHeaders headers, HttpEntity<String> entity, String id) {
+    public String updatePodcast(HttpEntity<String> entity, String id) {
         RestTemplate rt = new RestTemplate();
 
         rt.put("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, entity);
@@ -47,11 +50,9 @@ public class PodcastService {
 
     public String deletePodcast(HttpHeaders headers, String id) {
         RestTemplate rt = new RestTemplate();
-
-        HttpEntity<HttpHeaders> head = new HttpEntity<>(headers);
-
-        ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, HttpMethod.DELETE, head, String.class);
-
+        HttpEntity request = new HttpEntity(headers);
+        System.out.println("Attempting delete on: " + id);
+        ResponseEntity<String> res =  rt.exchange("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, HttpMethod.DELETE, request, String.class);
         return res.getBody();
     }
 }
