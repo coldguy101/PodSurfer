@@ -9,7 +9,7 @@ import { LoginService } from '../login/login.service';
 })
 export class ProfileComponent implements OnInit{
   user: any;
-  message = "Welcome";
+  bookmarked: any;
   selection: string;
 
   constructor(private profileService: ProfileService, private loginService: LoginService) {}
@@ -22,5 +22,17 @@ export class ProfileComponent implements OnInit{
     };
 
     this.profileService.getProfile(this.loginService.getToken()).then(success);
+  }
+
+  updateProfile() {
+    //this.profileService.updateProfile(user);
+  }
+
+  updateBookmarked() {
+
+  }
+
+  removeBookmarkedPodcast() {
+
   }
 }
