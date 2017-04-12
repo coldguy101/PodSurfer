@@ -15,19 +15,22 @@ let PodcastComponent = class PodcastComponent {
     constructor(podcastService, route) {
         this.podcastService = podcastService;
         this.route = route;
+        this.formData = {};
     }
     ngOnInit() {
         this.subscription = this.route.params.subscribe(params => {
             this.podID = params['id'];
             const that = this;
             let success = function (pod) {
-                that.podCast = pod;
+                that.podcast = pod;
             };
             this.podcastService.getPodcastFromID(this.podID).then(success);
         });
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();
+    }
+    editPodcast() {
     }
 };
 PodcastComponent = __decorate([
