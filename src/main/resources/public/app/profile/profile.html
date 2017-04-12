@@ -36,11 +36,11 @@
         </div>
         <div class="form-group">
             <label for="userEmail">Email address</label>
-            <input class="form-control" name="email" id="userEmail" type="email" [(ngModel)]="formData.email" value="{{user?.email}}">
+            <input class="form-control" name="email" id="userEmail" type="email" [(ngModel)]="formData.email" value="{{user?.email}}" disabled>
         </div>
         <div class="form-group">
             <label for="userPassword">Password</label>
-            <input class="form-control" name="password" id="userPassword" type="password" [(ngModel)]="formData.password" value="{{user?.password}}">
+            <input class="form-control" name="password" id="userPassword" type="password" [(ngModel)]="formData.password" value="{{user?.password}}" disabled>
         </div>
         <div class="form-group">
             <label for="userInterests">Your Interests:</label>

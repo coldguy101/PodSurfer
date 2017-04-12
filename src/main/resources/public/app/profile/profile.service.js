@@ -24,9 +24,41 @@ let ProfileService = class ProfileService {
             .then(res => res.json())
             .catch(this.handleError);
     }
-    setProfile(profile, token) {
+    updateProfile(profile, token) {
         console.log(profile);
         let headers = new http_1.Headers();
+        headers.append('Authorization', 'Bearer ' + token);
+        return this.http.put("/api/user/update", profile, { headers: headers })
+            .subscribe(res => {
+            console.log(res);
+        });
+    }
+    getBookmarks(token) {
+        let that = this;
+        let success = function (values) {
+            that.bookmarks = values.bookmarks;
+        };
+        this.getProfile(token).then(success);
+        return this.bookmarks;
+    }
+    getBookmarksPromise(token) {
+        return this.getProfile(token).then(res => res.bookmarks);
+    }
+    addBookmark(id, token) {
+        this.bookmarks.push(id);
+        this.updateProfile({ bookmarks: this.bookmarks }, token);
+    }
+    removeBookmark(id, token) {
+        let index = this.bookmarks.indexOf(id);
+        if (index !== -1) {
+            if (index > -1) {
+                this.bookmarks.splice(index, 1);
+            }
+        }
+        this.updateProfile({ bookmarks: this.bookmarks }, token);
+    }
+    isPodcastBookmarked(id, token) {
+        return this.bookmarks.indexOf(id) !== -1;
     }
     handleError(error) {
         console.error('An error occurred retrieving user data', error);

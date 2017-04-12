@@ -14,7 +14,8 @@
                     <th>Length</th>
                     <!--<th>Tags</th>-->
                     <th>Link</th>
-                    <th>Delete</th>
+                    <th *ngIf="loggedIn">Favorite</th>
+                    <th *ngIf="loggedIn">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,7 +35,9 @@
                     <td *ngIf="podcast.link">
                         <a href="{{ podcast.link }}" class="btn btn-primary">Get Podcast</a>
                     </td>
-                    <td><button class="btn btn-danger" (click)="rmPodcast(podcast)">Delete</button></td>
+                    <td *ngIf="loggedIn && !isPodcastFavorited(podcast._id)"><button class="btn btn-success" (click)="favoritePodcast(podcast._id)">Favorite</button></td>
+                    <td *ngIf="loggedIn && isPodcastFavorited(podcast._id)"><button class="btn btn-default" (click)="unFavoritePodcast(podcast._id)">Unfavorite</button></td>
+                    <td *ngIf="loggedIn"><button class="btn btn-danger" (click)="rmPodcast(podcast)">Delete</button></td>
                 </tr>
             </tbody>
         </table>
