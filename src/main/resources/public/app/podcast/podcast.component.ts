@@ -10,9 +10,10 @@ import { PodcastService } from './podcast.service';
   templateUrl: './app/podcast/podcast.html',
   providers: [ PodcastService ]
 })
-export class PodcastComponent {//implements OnInit, OnDestroy{
+export class PodcastComponent implements OnInit, OnDestroy{
   podID: string;
-  podCast: any;
+  podcast: any;
+  formData: any = {};
   private subscription: any;
 
   constructor(private podcastService: PodcastService, private route: ActivatedRoute) {}
@@ -23,7 +24,7 @@ export class PodcastComponent {//implements OnInit, OnDestroy{
 
       const that = this;
       let success = function (pod: any) {
-        that.podCast = pod;
+        that.podcast = pod;
       };
 
       this.podcastService.getPodcastFromID(this.podID).then(success);
@@ -32,5 +33,9 @@ export class PodcastComponent {//implements OnInit, OnDestroy{
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  editPodcast() {
+
   }
 }
