@@ -24,6 +24,10 @@ let ProfileService = class ProfileService {
             .then(res => res.json())
             .catch(this.handleError);
     }
+    setProfile(profile, token) {
+        console.log(profile);
+        let headers = new http_1.Headers();
+    }
     handleError(error) {
         console.error('An error occurred retrieving user data', error);
         return Promise.reject(error.message || error);

@@ -27,6 +27,16 @@ export class ProfileService {
       .catch(this.handleError);
   }
 
+  setProfile(profile: any, token: string) {
+    console.log(profile);
+    let headers: Headers = new Headers();
+    //headers.append('Authorization', 'Bearer ' + token);
+    //return this.http.put("/api/user/update", { headers: headers })
+    //  .subscribe(res => {
+    //    console.log(res);
+    //  });
+  }
+
   private handleError(error: any): PromiseLike<any> {
     console.error('An error occurred retrieving user data', error); // TODO: Remove this for production
     return Promise.reject(error.message || error);

@@ -9,6 +9,8 @@ import { LoginService } from '../login/login.service';
 })
 export class ProfileComponent implements OnInit{
   user: any;
+  interests: string;
+  formData: any = {};
   bookmarked: any;
   selection: string;
 
@@ -19,13 +21,19 @@ export class ProfileComponent implements OnInit{
 
     let success = function (user: any) {
       that.user = user;
+      for(let i of user.interests) {
+        that.interests += i + ",";
+      }
     };
 
     this.profileService.getProfile(this.loginService.getToken()).then(success);
   }
 
   updateProfile() {
-    //this.profileService.updateProfile(user);
+    if(typeof(this.formData.interests) == "string") {
+      this.formData.interests = this.formData.interests.split(",");
+    }
+    this.profileService.setProfile(this.formData, this.loginService.getToken());
   }
 
   updateBookmarked() {
