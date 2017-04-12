@@ -13,7 +13,6 @@ const podcast_service_1 = require('./podcast.service');
 let PodcastsComponent = class PodcastsComponent {
     constructor(podcastService) {
         this.podcastService = podcastService;
-        this.message = "All your swanky podcasts are here:";
     }
     ngOnInit() {
         const that = this;

@@ -1,14 +1,8 @@
 <div class="container">
-    <p>{{ message }}</p>
-
-    <input type="text" [(ngModel)]="selection">
-
-    <!--<p>{{ selection }}</p>-->
-
-    <!-- Print all the podcasts in json format-->
-    <!--<div *ngFor="let podcast of podcasts">-->
-        <!--{{ podcast | json }}-->
-    <!--</div>-->
+    <div class="form-group">
+        <label for="search">Filter Podcasts:</label>
+        <input type="text" id="search" class="form-control" placeholder="Search" [(ngModel)]="selection">
+    </div>
 
     <div class="table-responsive">
         <table class="table table-striped">

@@ -7,7 +7,6 @@ import { PodcastService } from './podcast.service';
   providers: [ PodcastService ]
 })
 export class PodcastsComponent implements OnInit{
-  message = "All your swanky podcasts are here:";
   podcasts: any;
   selection: string;
 
