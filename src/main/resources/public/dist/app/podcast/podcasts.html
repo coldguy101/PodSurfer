@@ -1,29 +1,64 @@
-<div class="jumbotron">
-    <p>{{ message }}</p>
+<div class="container">
+    <div class="form-group">
+        <label for="search">Filter Podcasts:</label>
+        <input type="text" id="search" class="form-control" placeholder="Search" [(ngModel)]="selection">
+    </div>
 
-    <input type="text" [(ngModel)]="selection">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Producer</th>
+                    <th>Description</th>
+                    <th>Length</th>
+                    <!--<th>Tags</th>-->
+                    <th>Link</th>
+                    <th *ngIf="loggedIn">Favorite</th>
+                    <th *ngIf="loggedIn">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let podcast of podcasts | filter : 'name' : selection">
+                    <td><a [routerLink]="'/podcast/' + podcast._id">{{ podcast.name }}</a></td>
+                    <td>{{ podcast.producer }}</td>
+                    <td>{{ podcast.description }}</td>
+                    <td>{{ podcast.length }}</td>
+                    <!--<td *ngIf="podcast.tags">-->
+                        <!--<span *ngFor="let tag of {{ podcast.tags }}">-->
+                            <!--{{ tag }},-->
+                        <!--</span>-->
+                    <!--</td>-->
+                    <td *ngIf="!podcast.link">
+                        <a class="btn btn-warning" disabled>Unavailable</a>
+                    </td>
+                    <td *ngIf="podcast.link">
+                        <a href="{{ podcast.link }}" class="btn btn-primary">Get Podcast</a>
+                    </td>
+                    <td *ngIf="loggedIn && !isPodcastFavorited(podcast._id)"><button class="btn btn-success" (click)="favoritePodcast(podcast._id)">Favorite</button></td>
+                    <td *ngIf="loggedIn && isPodcastFavorited(podcast._id)"><button class="btn btn-default" (click)="unFavoritePodcast(podcast._id)">Unfavorite</button></td>
+                    <td *ngIf="loggedIn"><button class="btn btn-danger" (click)="rmPodcast(podcast)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <!--<p>{{ selection }}</p>-->
-
-    <ul class="mdl-list">
+    <!--<ul class="mdl-list">
         <li *ngFor="let podcast of podcasts | filter : 'name' : selection"
             class="mdl-list__item mdl-list__item--three-line">
             <span class="mdl-list__item-primary-content">
-                <!--<i class="material-icons mdl-list__item-avatar">person</i>-->
+                <!--<i class="material-icons mdl-list__item-avatar">person</i>
                 <a [routerLink]="['/podcast/' + podcast._id]">{{ podcast.name }}</a>
                 <span class="mdl-list__item-text-body">
                     {{ podcast.description }}
                     <button class="btn-danger" (click)="rmPodcast(podcast._id)">Delete</button>
                 </span>
-
-
-
             </span>
             <span class="mdl-list__item-secondary-content">
                 <a class="mdl-list__item-secondary-action" href="#">
-                    <!--<i class="material-icons">star</i>-->
+                    <!--<i class="material-icons">star</i>
                 </a>
             </span>
         </li>
-    </ul>
+    </ul>-->
 </div>

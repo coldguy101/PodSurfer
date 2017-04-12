@@ -21,6 +21,12 @@ let HomeComponent = class HomeComponent {
         this.zen = "Temporary";
     }
     ngOnInit() {
+        this.loggedIn = this.loginService.isLoggedIn();
+        this.renderPodcasts();
+    }
+    ngDoCheck() {
+    }
+    renderPodcasts() {
         let that = this;
         let success = function (podcasts) {
             that.recommendedPodcasts = podcasts;
@@ -34,7 +40,8 @@ let HomeComponent = class HomeComponent {
 HomeComponent = __decorate([
     core_1.Component({
         selector: 'home',
-        templateUrl: '../../../app/home/home.html',
+        templateUrl: './app/home/home.html',
+        styleUrls: ['./app/home/home.css'],
         providers: [home_service_1.HomeService, podcast_service_1.PodcastService]
     }), 
     __metadata('design:paramtypes', [home_service_1.HomeService, podcast_service_1.PodcastService, login_service_1.LoginService])

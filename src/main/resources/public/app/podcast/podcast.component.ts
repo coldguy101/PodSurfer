@@ -4,19 +4,23 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PodcastService } from './podcast.service';
+import { LoginService } from "../login/login.service";
 
 @Component ({
   selector: 'podcast',
   templateUrl: './app/podcast/podcast.html',
-  providers: [ PodcastService ]
+  providers: [ PodcastService, LoginService ]
 })
 export class PodcastComponent implements OnInit, OnDestroy{
   podID: string;
   podcast: any;
   formData: any = {};
+  isLoggedIn: boolean;
   private subscription: any;
 
-  constructor(private podcastService: PodcastService, private route: ActivatedRoute) {}
+  constructor(private podcastService: PodcastService,
+              private loginService: LoginService,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.subscription = this.route.params.subscribe(params => {
@@ -28,6 +32,7 @@ export class PodcastComponent implements OnInit, OnDestroy{
       };
 
       this.podcastService.getPodcastFromID(this.podID).then(success);
+      this.isLoggedIn = this.loginService.isLoggedIn();
     });
   }
 

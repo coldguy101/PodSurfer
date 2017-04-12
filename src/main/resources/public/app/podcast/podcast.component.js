@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = require('@angular/core');
 const router_1 = require('@angular/router');
 const podcast_service_1 = require('./podcast.service');
+const login_service_1 = require("../login/login.service");
 let PodcastComponent = class PodcastComponent {
-    constructor(podcastService, route) {
+    constructor(podcastService, loginService, route) {
         this.podcastService = podcastService;
+        this.loginService = loginService;
         this.route = route;
         this.formData = {};
     }
@@ -25,6 +27,7 @@ let PodcastComponent = class PodcastComponent {
                 that.podcast = pod;
             };
             this.podcastService.getPodcastFromID(this.podID).then(success);
+            this.isLoggedIn = this.loginService.isLoggedIn();
         });
     }
     ngOnDestroy() {
@@ -37,9 +40,9 @@ PodcastComponent = __decorate([
     core_1.Component({
         selector: 'podcast',
         templateUrl: './app/podcast/podcast.html',
-        providers: [podcast_service_1.PodcastService]
+        providers: [podcast_service_1.PodcastService, login_service_1.LoginService]
     }), 
-    __metadata('design:paramtypes', [podcast_service_1.PodcastService, router_1.ActivatedRoute])
+    __metadata('design:paramtypes', [podcast_service_1.PodcastService, login_service_1.LoginService, router_1.ActivatedRoute])
 ], PodcastComponent);
 exports.PodcastComponent = PodcastComponent;
 //# sourceMappingURL=podcast.component.js.map

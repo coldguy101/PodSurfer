@@ -1,14 +1,3 @@
-<!--<p *ngIf="podCast">ID: {{podCast._id}}</p>
-<p *ngIf="podCast">Name: {{podCast.name}}</p>
-<p *ngIf="podCast">Link: {{podCast.link}}</p>
-<p *ngIf="podCast">Release: {{podCast.release}}</p>
-<p *ngIf="podCast">Producer: {{podCast.producer}}</p>
-<p *ngIf="podCast">Length: {{podCast.length}}</p>
-<p *ngIf="podCast">Desc: {{podCast.description}}</p>
-<p *ngIf="podCast">{{podCast.episodes}}</p>
-<p *ngIf="podCast">{{podCast.tags}}</p>
-<p *ngIf="podCast">{{podCast.imageURL}}</p>
--->
 <div class="container">
     <form (ngSubmit)="editPodcast()">
         <div class="form-group">
@@ -17,39 +6,39 @@
         </div>
         <div class="form-group">
             <label for="podcastName">Name</label>
-            <input class="form-control" name="name" id="podcastName" type="text" [(ngModel)]="formData.name" value="{{podcast?.name}}">
+            <input class="form-control" name="name" id="podcastName" type="text" [(ngModel)]="formData.name" value="{{podcast?.name}}" [disabled]="!isLoggedIn">
         </div>
         <div class="form-group">
             <label for="podcastLink">Link</label>
-            <input class="form-control" name="link" id="podcastlink" type="url" [(ngModel)]="formData.link" value="{{podcast?.link}}">
+            <input class="form-control" name="link" id="podcastlink" type="url" [(ngModel)]="formData.link" value="{{podcast?.link}}" [disabled]="!isLoggedIn">
         </div>
         <div class="form-group">
             <label for="podcastRelease">Release Date</label>
-            <input class="form-control" name="release" id="podcastRelease" type="date" [(ngModel)]="formData.release" value="{{podcast?.release}}">
+            <input class="form-control" name="release" id="podcastRelease" type="text" [(ngModel)]="formData.release" value="{{podcast?.release}}" [disabled]="!isLoggedIn">
         </div>
         <div class="form-group">
             <label for="podcastProducer">Producer</label>
-            <input class="form-control" name="producer" id="podcastProducer" type="name" [(ngModel)]="formData.producer" value="{{podcast?.producer}}">
+            <input class="form-control" name="producer" id="podcastProducer" type="name" [(ngModel)]="formData.producer" value="{{podcast?.producer}}" [disabled]="!isLoggedIn">
         </div>
         <div class="form-group">
             <label for="podcastLength">Length</label>
-            <input class="form-control" name="length" id="podcastLength" type="time" [(ngModel)]="formData.length" value="{{podcast?.length}}">
+            <input class="form-control" name="length" id="podcastLength" type="text" [(ngModel)]="formData.length" value="{{podcast?.length}}" [disabled]="!isLoggedIn">
         </div>
         <div class="form-group">
             <label for="podcastDescription">Description</label>
-            <input class="form-control" name="description" id="podcastDescription" type="text" [(ngModel)]="formData.description" value="{{podcast?.description}}">
+            <input class="form-control" name="description" id="podcastDescription" type="text" [(ngModel)]="formData.description" value="{{podcast?.description}}" [disabled]="!isLoggedIn">
         </div>
         <div class="form-group">
             <label for="podcastEpisodes">Episodes</label>
-            <input class="form-control" name="episodes" id="podcastEpisodes" type="text" [(ngModel)]="formData.episodes" value="{{ episodes ? episodes : '' }}">
+            <input class="form-control" name="episodes" id="podcastEpisodes" type="text" [(ngModel)]="formData.episodes" value="{{ episodes ? episodes : '' }}" [disabled]="!isLoggedIn">
         </div>
         <div class="form-group">
             <label for="podcastTags">Tags</label>
-            <input class="form-control" name="tags" id="podcastTags" type="text" [(ngModel)]="formData.tags" value="{{ tags ? tags : '' }}">
+            <input class="form-control" name="tags" id="podcastTags" type="text" [(ngModel)]="formData.tags" value="{{ tags ? tags : '' }}" [disabled]="!isLoggedIn">
         </div>
         <div class="form-group">
             <label for="podcastImageURL">Link</label>
-            <input class="form-control" name="imageURL" id="podcastImageURL" type="url" [(ngModel)]="formData.imageURL" value="{{podcast?.imageURL}}">
+            <input class="form-control" name="imageURL" id="podcastImageURL" type="url" [(ngModel)]="formData.imageURL" value="{{podcast?.imageURL}}" [disabled]="!isLoggedIn">
         </div>
 
         <button class="btn btn-primary" type="submit">Save Changes</button>
