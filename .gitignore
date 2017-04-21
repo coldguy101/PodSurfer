@@ -10,3 +10,5 @@ PodSurfer.iml
 
 #Ignore the target directory (spring output dir)
 target/
+
+*.iml
