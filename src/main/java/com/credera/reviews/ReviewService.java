@@ -15,15 +15,7 @@ import java.util.List;
 @Service
 public class ReviewService {
 
-    public ReviewModel[] getAllReviews() {
-        RestTemplate rt = new RestTemplate();
-        ReviewModel[] pm = rt.getForObject("https://podsurfer-spring3.herokuapp.com/api/review/", ReviewModel[].class);
-        for(ReviewModel pmm : pm)
-            System.out.println(pmm);
-        return pm;
-    }
-
-    public String createReview(HttpHeaders headers, HttpEntity<String> entity) {
+    public String createReview(HttpEntity<String> entity) {
         RestTemplate rt = new RestTemplate();
         ResponseEntity<String> auth = rt.postForEntity("https://podsurfer-spring3.herokuapp.com/api/review/", entity, String.class);
         System.out.println(auth.getBody());
@@ -44,9 +36,15 @@ public class ReviewService {
         return res.getBody();
     }
 
-    public String updateReview(HttpHeaders headers, HttpEntity<String> entity, String id) {
+    public ReviewModel[] getReviewsForPodcast(HttpEntity<String> entity, String id) {
         RestTemplate rt = new RestTemplate();
-        rt.put("https://podsurfer-spring3.herokuapp.com/api/podcast/" + id, entity);
+        ReviewModel[] rm = rt.getForObject("https://podsurfer-spring3.herokuapp.com/api/review/" + id, ReviewModel[].class);
+        return rm;
+    }
+
+    public String updateReview(HttpEntity<String> entity, String id) {
+        RestTemplate rt = new RestTemplate();
+        rt.put("https://podsurfer-spring3.herokuapp.com/api/review/" + id, entity);
         ResponseEntity<String> res = rt.exchange("https://podsurfer-spring3.herokuapp.com/api/review/" + id, HttpMethod.PUT, entity, String.class);
         return res.getBody();
     }

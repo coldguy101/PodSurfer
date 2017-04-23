@@ -18,20 +18,14 @@ public class ReviewController {
     @Autowired
     private ReviewService revService;
 
-    @RequestMapping("/all")
-    public ReviewModel[] getReviews() {
-        return revService.getAllReviews();
-    }
-
     @RequestMapping(
             value = "/create",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
     public @ResponseBody String createNewReview(
-            @RequestHeader HttpHeaders headers,
             HttpEntity<String> entity){
-        String result = revService.createReview(headers, entity);
+        String result = revService.createReview(entity);
         return result;
     }
 
@@ -43,10 +37,23 @@ public class ReviewController {
         return result;
     }
 
-    @RequestMapping("/getMy")
+    @RequestMapping(
+            value = "/getMy",
+            method = RequestMethod.GET
+    )
     public String getMyReviews(@RequestHeader HttpHeaders headers) {
         System.out.println("Headers: " + headers);
         return revService.getMyReviews(headers);
+    }
+
+    @RequestMapping(
+            value = "/reviewForPod/{id}",
+            method = RequestMethod.GET
+    )
+    public ReviewModel[] getReviewsForPod(
+            @PathVariable(value="id") String id,
+            HttpEntity<String> entity) {
+        return revService.getReviewsForPodcast(entity, id);
     }
 
     @RequestMapping(
@@ -56,9 +63,8 @@ public class ReviewController {
     )
     public String updateReview(
             @PathVariable(value="id") String id,
-            @RequestHeader HttpHeaders headers,
             HttpEntity<String> entity) {
-        String result = revService.updateReview(headers, entity, id);
+        String result = revService.updateReview(entity, id);
         System.out.println("Response:" + result);
         return result;
     }
