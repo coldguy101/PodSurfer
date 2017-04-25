@@ -24,10 +24,10 @@ let PodcastsComponent = class PodcastsComponent {
         let success = function (podcasts) {
             that.podcasts = podcasts;
         };
-        this.podcastService.getAllPodcasts().then(success);
         this.loggedIn = this.loginService.isLoggedIn();
         if (this.loggedIn)
             this.profileService.getBookmarks(this.loginService.getToken());
+        this.podcastService.getAllPodcasts().then(success);
     }
     rmPodcast(pcast) {
         delete this.podcasts[this.podcasts.indexOf(pcast)];

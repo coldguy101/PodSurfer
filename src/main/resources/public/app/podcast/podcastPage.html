@@ -1,19 +1,20 @@
-
 <div class="form-group Header row">
-    <div class = "col-md-2">
+    <div class="col-md-2">
         <div *ngIf="!podcast?.imageURL">
-            <img class="Image img-rounded" src="http://shippingroompod.com/wp-content/themes/podcaster-child/img/placeholder-square.png" alt="Placeholder" width="250" height="202">
+            <img class="Image img-rounded"
+                 src="http://shippingroompod.com/wp-content/themes/podcaster-child/img/placeholder-square.png"
+                 alt="Placeholder" width="250" height="202">
             <!--<img class="Image" src="https://static1.squarespace.com/static/52d66949e4b0a8cec3bcdd46/t/52f20963e4b028d7d4c1f6d4/1391593828907/Hello+Internet.003.png" class="img-rounded" alt="Cinque Terre" width="250" height="202">-->
         </div>
         <div *ngIf="podcast?.imageURL">
             <img class="Image img-rounded" src="{{ podcast?.imageURL }}" alt="Podcast Image" width="250" height="202">
         </div>
     </div>
-    <hr class = " col-xs-12 thickLine ">
+    <hr class=" col-xs-12 thickLine ">
 </div>
-<div class = "row">
-    <div class = "col-md-2 borderRight " >
-        <div class = "centerBlock">
+<div class="row">
+    <div class="col-md-3 borderRight ">
+        <div class="centerBlock">
             <h3>{{ podcast?.name }}</h3>
             <!--Description-->
             <p>{{ podcast?.description }}</p>
@@ -22,15 +23,17 @@
                     <div class="span4 pull-center">
                         <button class="btn btn-primary">Edit Podcast</button>
                         <div class="padding"></div>
-                        <button class="btn btn-twitter"><!--i class="fa fa-twitter"</i>-->Tweet on Twitter</button><br>
+                        <button class="btn btn-twitter"><!--i class="fa fa-twitter"</i>-->Tweet on Twitter</button>
+                        <br>
                         <div class="padding"></div>
-                        <button class="btn btn-linkedin"><!--i class="fa fa-facebook"</i>-->Share on Facebook</button><br>
+                        <button class="btn btn-linkedin"><!--i class="fa fa-facebook"</i>-->Share on Facebook</button>
+                        <br>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class=" col-md-8 table-responsive border" >
+    <div class=" col-md-8 table-responsive border">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -41,19 +44,19 @@
             </tr>
             </thead>
             <tbody>
-                <!--<tr *ngFor="let episode of podcast.episodes?"> <!--iterate over episode-->
-                <tr>
-                    <td> episode.Number </td>
-                    <td> episode.description? </td>
-                    <td> episode.length? </td>
+            <!--<tr *ngFor="let episode of podcast.episodes?"> <!--iterate over episode-->
+            <tr>
+                <td> episode.Number</td>
+                <td> episode.description?</td>
+                <td> episode.length?</td>
 
-                    <td *ngIf="!podcast?.link">
-                        <a class="btn btn-warning" disabled>Unavailable</a>
-                    </td>
-                    <td *ngIf="podcast?.link">
-                        <a href=" episode.link " class="btn btn-primary">Get Podcast</a>
-                    </td>
-                </tr>
+                <td *ngIf="!podcast?.link">
+                    <a class="btn btn-warning" disabled>Unavailable</a>
+                </td>
+                <td *ngIf="podcast?.link">
+                    <a href=" episode.link " class="btn btn-primary">Get Podcast</a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

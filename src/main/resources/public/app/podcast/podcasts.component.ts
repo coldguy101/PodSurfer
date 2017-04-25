@@ -11,7 +11,7 @@ import { ProfileService } from "../profile/profile.service";
 export class PodcastsComponent implements OnInit{
   podcasts: any;
   loggedIn: boolean = false;
-  selection: string;
+  bookmarked: string;
 
   constructor(private podcastService: PodcastService,
               private loginService: LoginService,
@@ -24,11 +24,18 @@ export class PodcastsComponent implements OnInit{
       that.podcasts = podcasts;
     };
 
-    this.podcastService.getAllPodcasts().then(success);
     this.loggedIn = this.loginService.isLoggedIn();
+
     if(this.loggedIn)
-      this.profileService.getBookmarks(this.loginService.getToken()); //Must call once :/
+      this.profileService.getBookmarks(this.loginService.getToken());
+
+    this.podcastService.getAllPodcasts().then(success);
+
+    //if(this.loggedIn)
+      //this.profileService.getBookmarks(this.loginService.getToken()); //Must call once :/
           //This is made incorrectly and will fail if the podcasts load before the callback finishes for this.
+    // if(this.loggedIn)
+    //   this.profileService.getBookmarksPromise(this.loginService.getToken()).then(res => this.bookmarked = res);
   }
 
   rmPodcast(pcast: any) {
