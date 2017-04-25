@@ -14,6 +14,13 @@
         </div>
     </div>
 
+    <div *ngIf="recommendedPodcasts?.length <= 0">
+        <div class="text-center">
+            <div class="alert alert-info">
+                <strong>No interests found!</strong> Update interests on your profile page
+            </div>
+        </div>
+    </div>
 
     <!--<div class="row">
         <div class="col-xs-offset-4 col-xs-4">
