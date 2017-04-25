@@ -13,7 +13,7 @@
             <!--<li routerLinkActive="active"><a routerLink="/contact" ><i class="fa fa-comment"></i> Contact</a></li>-->
             <li routerLinkActive="active"><a routerLink="/podcasts" ><i class="fa fa-podcast"></i> All Podcasts</a></li>
             <li *ngIf="isLoggedIn" routerLinkActive="active"><a routerLink="/addPodcast" ><i class="fa fa-podcast"></i> Add Podcast</a></li>
-            <li *ngIf="isLoggedIn" routerLinkActive="active"><a routerLink="/profile"><i class="fa fa-user-o"></i> MyProfile</a></li>
+            <li *ngIf="isLoggedIn" routerLinkActive="active"><a routerLink="/profile"><i class="fa fa-user-o"></i> My Profile</a></li>
             <li *ngIf="!isLoggedIn" routerLinkActive="active"><a routerLink="/login" ><i class="fa fa-user"></i> Login</a></li>
             <li *ngIf="isLoggedIn"><a href="#" (click)="logout()"><i class="fa fa-user"></i> Logout</a></li>
         </ul>
