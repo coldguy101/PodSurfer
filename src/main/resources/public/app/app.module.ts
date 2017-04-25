@@ -13,6 +13,7 @@ import { LoginComponent }         from './login/login.component';
 import { LoginGuard }             from './guards/login.guard';
 import { PodcastsComponent }      from './podcast/podcasts.component';
 import { PodcastComponent }       from './podcast/podcast.component';
+import { PodcastPageComponent }   from './podcast/podcastPage.component';
 import { AddPodcastComponent }    from './podcast/addPodcast.component';
 import { ProfileComponent }       from './profile/profile.component';
 
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'podcasts', component: PodcastsComponent},
-  {path: 'podcast/:id', component: PodcastComponent},
+  {path: 'podcast/:id', component: PodcastPageComponent},
+  {path: 'podcast/edit/:id', component: PodcastComponent},
   {path: 'addPodcast', component: AddPodcastComponent},
   {path: 'profile', component: ProfileComponent} //, canActivate: [LoginGuard]},
   // otherwise redirect to home
@@ -59,6 +61,7 @@ const routes: Routes = [
     LoginComponent,
     PodcastsComponent,
     PodcastComponent,
+    PodcastPageComponent,
     AddPodcastComponent,
     ProfileComponent
   ],

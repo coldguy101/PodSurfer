@@ -1,0 +1,42 @@
+.thickLine
+{
+    border-top: 5px solid #a2998d;
+    margin-bottom: 0px;
+}
+.Header
+{
+    background-color:antiquewhite;
+}
+
+.podDesc
+{
+    padding-top:  20px;
+    padding-left: 30px;
+}
+
+.Image
+{
+    padding-left: 15px;
+    padding-top: 20px;
+}
+
+.border
+{
+    padding-right:20px;
+    border-right: 1px solid #ccc;
+    padding-left:20px;
+    border-left: 1px solid #ccc;
+}
+
+.padding
+{
+    padding-top:5px;
+}
+
+.centerBlock {
+    padding-left: 20px;
+}
+
+.navbar {
+    margin-bottom: 0; !important
+}

@@ -22,6 +22,7 @@ const login_component_1 = require('./login/login.component');
 const login_guard_1 = require('./guards/login.guard');
 const podcasts_component_1 = require('./podcast/podcasts.component');
 const podcast_component_1 = require('./podcast/podcast.component');
+const podcastPage_component_1 = require('./podcast/podcastPage.component');
 const addPodcast_component_1 = require('./podcast/addPodcast.component');
 const profile_component_1 = require('./profile/profile.component');
 const login_service_1 = require('./login/login.service');
@@ -32,7 +33,8 @@ const routes = [
     { path: 'home', component: home_component_1.HomeComponent },
     { path: 'login', component: login_component_1.LoginComponent },
     { path: 'podcasts', component: podcasts_component_1.PodcastsComponent },
-    { path: 'podcast/:id', component: podcast_component_1.PodcastComponent },
+    { path: 'podcast/:id', component: podcastPage_component_1.PodcastPageComponent },
+    { path: 'podcast/edit/:id', component: podcast_component_1.PodcastComponent },
     { path: 'addPodcast', component: addPodcast_component_1.AddPodcastComponent },
     { path: 'profile', component: profile_component_1.ProfileComponent }
 ];
@@ -55,6 +57,7 @@ AppModule = __decorate([
             login_component_1.LoginComponent,
             podcasts_component_1.PodcastsComponent,
             podcast_component_1.PodcastComponent,
+            podcastPage_component_1.PodcastPageComponent,
             addPodcast_component_1.AddPodcastComponent,
             profile_component_1.ProfileComponent
         ],
