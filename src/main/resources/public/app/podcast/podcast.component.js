@@ -12,13 +12,15 @@ const core_1 = require('@angular/core');
 const router_1 = require('@angular/router');
 const podcast_service_1 = require('./podcast.service');
 const login_service_1 = require("../login/login.service");
+const forms_1 = require('@angular/forms');
 let PodcastComponent = class PodcastComponent {
     constructor(podcastService, loginService, route) {
         this.podcastService = podcastService;
         this.loginService = loginService;
         this.route = route;
+        this.currentEpisode = {};
         this.formData = {
-            'episodes': []
+            'episodes': [{}]
         };
     }
     ngOnInit() {
@@ -41,13 +43,24 @@ let PodcastComponent = class PodcastComponent {
         console.log(this.formData);
     }
     editEpisode(episode) {
+        this.currentEpisode = episode;
+    }
+    saveEpisode() {
+        for (let index in this.formData.episodes) {
+            if (this.formData.episodes[index].number === this.currentEpisode.number) {
+                this.formData.episodes[index].name = this.currentEpisode.name;
+                this.formData.episodes[index].description = this.currentEpisode.description;
+                this.formData.episodes[index].link = this.currentEpisode.link;
+                return;
+            }
+        }
     }
 };
 PodcastComponent = __decorate([
     core_1.Component({
         selector: 'podcast',
         templateUrl: './app/podcast/podcast.html',
-        providers: [podcast_service_1.PodcastService, login_service_1.LoginService]
+        providers: [podcast_service_1.PodcastService, login_service_1.LoginService, forms_1.FormsModule]
     }), 
     __metadata('design:paramtypes', [podcast_service_1.PodcastService, login_service_1.LoginService, router_1.ActivatedRoute])
 ], PodcastComponent);

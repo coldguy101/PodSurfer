@@ -57,7 +57,7 @@
                     <td>{{ episode.description }}</td>
                     <td>{{ episode.length }}</td>
 
-                    <button class="btn btn-info" (click)="editEpisode(episode._id)" data-toggle="modal" data-target="#myModal">Edit Episode</button>
+                    <button class="btn btn-info" (click)="editEpisode(episode)" data-toggle="modal" [attr.data-target]="'#' + episode.number">Edit Episode</button>
 
                     <!--<td *ngIf="!podcast?.link">-->
                         <!--<a class="btn btn-warning" disabled>Unavailable</a>-->
@@ -106,48 +106,52 @@
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
     <!-- Edit Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+    <div *ngFor="let episode of formData.episodes">
+        <div [id]="episode.number" class="modal fade" role="dialog">
+            <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">{{ episode.name }}</h4>
-                </div>
-                <form (ngSubmit)="insertEpisode()">
-                    <div class="row">
-                        <div class="form-group col-md-8">
-                            <label for="episodeName">Name</label>
-                            <input class="form-control" name="episodeName" id="episodeName" type="number" min="0"
-                                   [(ngModel)]="formData.episodes[episode._id]?.name"
-                                   value="" [disabled]="!isLoggedIn">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="episodeNum">Number</label>
-                            <input class="form-control" name="episodeNum" id="episodeNum" type="text"
-                                   value="" disabled>
-                        </div>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{ episode.name }}</h4>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label for="episodeDesc">Description</label>
-                            <input class="form-control" name="episodeDesc" id="episodeDesc" type="text"
-                                   [(ngModel)]="formData.episodes[episode._id]?.description"
-                                   value="" [disabled]="!isLoggedIn">
+                    <form (ngSubmit)="insertEpisode()">
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="episodeName">Name</label>
+                                <input class="form-control" name="episodeName" id="episodeName" type="text" min="0"
+                                       [(ngModel)]="currentEpisode.name"
+                                       [value]="episode.name" [disabled]="!isLoggedIn">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="episodeNum">Number</label>
+                                <input class="form-control" name="episodeNum" id="episodeNum" type="text"
+                                       [value]="episode.number" disabled>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label for="episodeLink">Link</label>
-                            <input class="form-control" name="episodeLink" id="episodeLink" type="text"
-                                   [(ngModel)]="formData.episodes[episode._id]?.link"
-                                   value="" [disabled]="!isLoggedIn">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="episodeDesc">Description</label>
+                                <input class="form-control" name="episodeDesc" id="episodeDesc" type="text"
+                                       [(ngModel)]="currentEpisode.description"
+                                       [value]="episode.description" [disabled]="!isLoggedIn">
+                            </div>
                         </div>
-                    </div>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="episodeLink">Link</label>
+                                <input class="form-control" name="episodeLink" id="episodeLink" type="text"
+                                       [(ngModel)]="currentEpisode.link"
+                                       [value]="episode.link" [disabled]="!isLoggedIn">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

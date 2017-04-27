@@ -5,18 +5,19 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PodcastService } from './podcast.service';
 import { LoginService } from "../login/login.service";
+import { FormsModule } from '@angular/forms';
 
 @Component ({
   selector: 'podcast',
   templateUrl: './app/podcast/podcast.html',
-  providers: [ PodcastService, LoginService ]
+  providers: [ PodcastService, LoginService, FormsModule ]
 })
 export class PodcastComponent implements OnInit, OnDestroy{
   podID: string;
   podcast: any;
-  selectedEpisodeID: string;
+  currentEpisode: any = {};
   formData: any = {
-    'episodes': []
+    'episodes': [{}]
   };
   isLoggedIn: boolean;
   private subscription: any;
@@ -50,6 +51,17 @@ export class PodcastComponent implements OnInit, OnDestroy{
   }
 
   editEpisode(episode: any) {
+    this.currentEpisode = episode;
+  }
 
+  saveEpisode() {
+    for(let index in this.formData.episodes) {
+      if(this.formData.episodes[index].number === this.currentEpisode.number) {
+        this.formData.episodes[index].name = this.currentEpisode.name;
+        this.formData.episodes[index].description = this.currentEpisode.description;
+        this.formData.episodes[index].link = this.currentEpisode.link;
+        return;
+      }
+    }
   }
 }
