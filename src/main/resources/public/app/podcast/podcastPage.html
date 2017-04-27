@@ -13,7 +13,7 @@
     <hr class=" col-xs-12 thickLine ">
 </div>
 <div class="row">
-    <div class="col-md-3 borderRight ">
+    <div class="col-md-4 borderRight ">
         <div class="centerBlock">
             <h3>{{ podcast?.name }}</h3>
             <!--Description-->
@@ -23,41 +23,68 @@
                     <div class="span4 pull-center">
                         <button class="btn btn-primary">Edit Podcast</button>
                         <div class="padding"></div>
-                        <button class="btn btn-twitter"><!--i class="fa fa-twitter"</i>-->Tweet on Twitter</button>
+                        <button class="btn btn-twitter"><!--i class="fa fa-twitter"</i>-->Twitter</button>
                         <br>
                         <div class="padding"></div>
-                        <button class="btn btn-linkedin"><!--i class="fa fa-facebook"</i>-->Share on Facebook</button>
+                        <button class="btn btn-linkedin"><!--i class="fa fa-facebook"</i>-->Facebook</button>
                         <br>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class=" col-md-8 table-responsive border">
+    <div class="col-md-8 table-responsive border">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Episode</th>
+                <th>Number</th>
+                <th>Name</th>
                 <th>Description</th>
                 <th>Length</th>
                 <th>Link</th>
             </tr>
             </thead>
             <tbody>
-            <!--<tr *ngFor="let episode of podcast.episodes?"> <!--iterate over episode-->
-            <tr>
-                <td> episode.Number</td>
-                <td> episode.description?</td>
-                <td> episode.length?</td>
+            <tr *ngFor="let episode of podcast?.episodes"> <!--iterate over episodes-->
+                <td>{{ episode.number }}</td>
+                <td>{{ episode.name }}</td>
+                <td>{{ episode.description }}</td>
+                <td>{{ episode.length }}</td>
 
                 <td *ngIf="!podcast?.link">
                     <a class="btn btn-warning" disabled>Unavailable</a>
                 </td>
                 <td *ngIf="podcast?.link">
-                    <a href=" episode.link " class="btn btn-primary">Get Podcast</a>
+                    <a href="{{ episode?.link }}" class="btn btn-primary">Get Episode</a>
                 </td>
             </tr>
             </tbody>
         </table>
+        <div *ngIf="reviews?.length > 0">
+            <div class="row">
+                <h3 class="text-center">Reviews</h3>
+            </div>
+            <div class="row" *ngFor="let review of reviews">
+                {{ review?.name }}
+                <hr/>
+                {{ review?.review }}
+            </div>
+        </div>
+        <div>
+            <div class="row reviewBox">
+                <h3 class="text-center">Add Review</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" [(ngModel)]="review.name" aria-describedby="titleHelp" placeholder="This podcast is ...">
+                        <small id="titleHelp" class="form-text text-muted">The title of your review.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="review">Review</label>
+                        <textarea class="form-control" id="review" [(ngModel)]="review.review" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

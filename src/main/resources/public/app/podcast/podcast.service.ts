@@ -130,16 +130,16 @@ export class PodcastService {
     //   });
   }
 
-  private encode(src: any){
-  let u = encodeURIComponent;
-  var urljson = "";
-  var keys = Object.keys(src);
-  for(var i=0; i <keys.length; i++){
-    urljson += u(keys[i]) + "=" + u(src[keys[i]]);
-    if(i < (keys.length-1))urljson+="&";
+  private encode(src: any) {
+    let u = encodeURIComponent;
+    var urljson = "";
+    var keys = Object.keys(src);
+    for(var i=0; i <keys.length; i++){
+      urljson += u(keys[i]) + "=" + u(src[keys[i]]);
+      if(i < (keys.length-1))urljson+="&";
+    }
+    return urljson;
   }
-  return urljson;
-}
 
   private handleError(error: any): PromiseLike<any> {
     console.error('An error occurred retrieving podcasts', error); // TODO: Remove this for production

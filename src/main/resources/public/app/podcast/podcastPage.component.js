@@ -11,23 +11,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = require('@angular/core');
 const router_1 = require('@angular/router');
 const podcast_service_1 = require('./podcast.service');
+const review_service_1 = require('./review.service');
 const login_service_1 = require("../login/login.service");
 let PodcastPageComponent = class PodcastPageComponent {
-    constructor(podcastService, loginService, route) {
+    constructor(podcastService, reviewService, loginService, route) {
         this.podcastService = podcastService;
+        this.reviewService = reviewService;
         this.loginService = loginService;
         this.route = route;
+        this.newReview = {};
     }
     ngOnInit() {
         this.subscription = this.route.params.subscribe(params => {
             this.podID = params['id'];
             const that = this;
-            let success = function (pod) {
+            let podSuccess = function (pod) {
                 that.podcast = pod;
             };
-            this.podcastService.getPodcastFromID(this.podID).then(success);
+            let revSuccess = function (reviews) {
+                that.reviews = reviews;
+            };
+            this.podcastService.getPodcastFromID(this.podID).then(podSuccess);
+            this.reviewService.getReviewsForPodcast(this.podID).then(revSuccess);
             this.isLoggedIn = this.loginService.isLoggedIn();
         });
+    }
+    createReview() {
+    }
+    checkCompleteness() {
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();
@@ -38,9 +49,9 @@ PodcastPageComponent = __decorate([
         selector: 'podcastPage',
         templateUrl: './app/podcast/podcastPage.html',
         styleUrls: ['./app/podcast/podcastPage.css'],
-        providers: [podcast_service_1.PodcastService, login_service_1.LoginService]
+        providers: [podcast_service_1.PodcastService, review_service_1.ReviewService, login_service_1.LoginService]
     }), 
-    __metadata('design:paramtypes', [podcast_service_1.PodcastService, login_service_1.LoginService, router_1.ActivatedRoute])
+    __metadata('design:paramtypes', [podcast_service_1.PodcastService, review_service_1.ReviewService, login_service_1.LoginService, router_1.ActivatedRoute])
 ], PodcastPageComponent);
 exports.PodcastPageComponent = PodcastPageComponent;
 //# sourceMappingURL=podcastPage.component.js.map
