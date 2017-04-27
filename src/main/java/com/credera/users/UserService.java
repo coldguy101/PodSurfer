@@ -2,6 +2,8 @@ package com.credera.users;
 
 import com.credera.podcasts.PodcastModel;
 import com.credera.podcasts.PodcastService;
+import com.credera.reviews.ReviewModel;
+import com.credera.reviews.ReviewService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -23,6 +25,9 @@ public class UserService {
 
     @Autowired
     PodcastService podcastService;
+
+    @Autowired
+    ReviewService reviewService;
 
     public String loginExistingUser(String email, String pass) {
         RestTemplate rt = new RestTemplate();
@@ -92,6 +97,27 @@ public class UserService {
                     }
                 }
             }
+        }
+        //If the size is less than 3 then we need to find 6 top-ranked podcasts to recommend!
+        if(pm.size() < 3) {
+            int thirdMax = 0;
+            int secondMax = 0;
+            int max = 0;
+            for(int i = 0; i < podcasts.length; i++) {
+                ReviewModel[] reviews = reviewService.getReviewsForPodcast(podcasts[i].get_id());
+                int sum = 0;
+                for(ReviewModel review : reviews) {
+                    sum += review.getRating();
+                }
+                if(sum > max) {
+                    thirdMax = secondMax;
+                    secondMax = max;
+                    max = i;
+                }
+            }
+            pm.add(podcasts[thirdMax]);
+            pm.add(podcasts[secondMax]);
+            pm.add(podcasts[thirdMax]);
         }
         return pm.toArray(new PodcastModel[0]);
     }

@@ -36,7 +36,7 @@ public class ReviewService {
         return res.getBody();
     }
 
-    public ReviewModel[] getReviewsForPodcast(HttpEntity<String> entity, String id) {
+    public ReviewModel[] getReviewsForPodcast(String id) {
         RestTemplate rt = new RestTemplate();
         ReviewModel[] rm = rt.getForObject("https://podsurfer-spring3.herokuapp.com/api/review/" + id, ReviewModel[].class);
         return rm;

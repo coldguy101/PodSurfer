@@ -13,6 +13,10 @@ export class LoginComponent {
   loading: boolean = false;
   model: any = {};
   registerModel: any = {};
+  validPassword: boolean = true;
+
+  errorLoggingIn: boolean = false;
+  errorSigningUp: boolean = false;
 
   constructor(private loginService: LoginService, private router: Router) {}
 
@@ -23,15 +27,59 @@ export class LoginComponent {
         //console.log(res);
         if (res) {
           this.router.navigate(['/']);
+          window.location.reload();
         }
       },
       error => {
         //alert("error logging in");
         console.log(error);
         this.loading = false;
+        this.errorSigningUp = true;
       }
     );
   }
+
+  checkPassword(): boolean {
+    let decimal = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%\^&\*])(?!.*\s).{8,25}$/;
+    if(typeof(this.model.password) !== "undefined") {
+      if (this.model.password.length < 8) {
+        //alert('The password needs to be at least 8 characters in length')
+        return false;
+      }
+      else if (this.model.password.length > 25) {
+        return false;
+      }
+      else if (this.model.password.match(decimal)) {
+        return true;
+      }
+      return false;
+    }
+  }
+
+  checkPasswordRegister(): boolean {
+    let decimal = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%\^&\*])(?!.*\s).{8,25}$/;
+    if(typeof(this.model.password) !== "undefined") {
+      if (this.model.password.length < 8) {
+        //alert('The password needs to be at least 8 characters in length')
+        //console.log("too short");
+        //this.validPassword = false;
+        return false;
+      }
+      else if (this.model.password.length > 25) {
+        //this.validPassword = false;
+        return false;
+      }
+      else if (this.model.password.match(decimal)) {
+        //alert('Account created');
+        //console.log("matches");
+        //this.validPassword = true;
+        return true;
+      }
+      //this.validPassword = false;
+      return false;
+    }
+  }
+
 
   login() {
     this.loading = true;
@@ -48,6 +96,7 @@ export class LoginComponent {
         //alert("error logging in");
         console.log(error);
         this.loading = false;
+        this.errorLoggingIn = true;
       }
     );
   }

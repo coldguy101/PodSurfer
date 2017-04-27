@@ -19,17 +19,52 @@ let LoginComponent = class LoginComponent {
         this.loading = false;
         this.model = {};
         this.registerModel = {};
+        this.validPassword = true;
+        this.errorLoggingIn = false;
+        this.errorSigningUp = false;
     }
     createUser() {
         this.loading = true;
         this.loginService.createUser(this.registerModel.name, this.registerModel.email, this.registerModel.password).subscribe(res => {
             if (res) {
                 this.router.navigate(['/']);
+                window.location.reload();
             }
         }, error => {
             console.log(error);
             this.loading = false;
+            this.errorSigningUp = true;
         });
+    }
+    checkPassword() {
+        let decimal = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%\^&\*])(?!.*\s).{8,25}$/;
+        if (typeof (this.model.password) !== "undefined") {
+            if (this.model.password.length < 8) {
+                return false;
+            }
+            else if (this.model.password.length > 25) {
+                return false;
+            }
+            else if (this.model.password.match(decimal)) {
+                return true;
+            }
+            return false;
+        }
+    }
+    checkPasswordRegister() {
+        let decimal = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%\^&\*])(?!.*\s).{8,25}$/;
+        if (typeof (this.model.password) !== "undefined") {
+            if (this.model.password.length < 8) {
+                return false;
+            }
+            else if (this.model.password.length > 25) {
+                return false;
+            }
+            else if (this.model.password.match(decimal)) {
+                return true;
+            }
+            return false;
+        }
     }
     login() {
         this.loading = true;
@@ -41,6 +76,7 @@ let LoginComponent = class LoginComponent {
         }, error => {
             console.log(error);
             this.loading = false;
+            this.errorLoggingIn = true;
         });
     }
 };

@@ -53,7 +53,7 @@ public class ReviewController {
     public ReviewModel[] getReviewsForPod(
             @PathVariable(value="id") String id,
             HttpEntity<String> entity) {
-        return revService.getReviewsForPodcast(entity, id);
+        return revService.getReviewsForPodcast(id);
     }
 
     @RequestMapping(
