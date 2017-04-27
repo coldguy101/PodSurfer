@@ -17,7 +17,9 @@ let PodcastComponent = class PodcastComponent {
         this.podcastService = podcastService;
         this.loginService = loginService;
         this.route = route;
-        this.formData = {};
+        this.formData = {
+            'episodes': []
+        };
     }
     ngOnInit() {
         this.subscription = this.route.params.subscribe(params => {
@@ -25,6 +27,8 @@ let PodcastComponent = class PodcastComponent {
             const that = this;
             let success = function (pod) {
                 that.podcast = pod;
+                if (pod.episodes)
+                    that.formData.episodes = pod.episodes;
             };
             this.podcastService.getPodcastFromID(this.podID).then(success);
             this.isLoggedIn = this.loginService.isLoggedIn();
@@ -34,6 +38,9 @@ let PodcastComponent = class PodcastComponent {
         this.subscription.unsubscribe();
     }
     editPodcast() {
+        console.log(this.formData);
+    }
+    editEpisode(episode) {
     }
 };
 PodcastComponent = __decorate([

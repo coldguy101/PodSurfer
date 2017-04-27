@@ -14,7 +14,10 @@ import { LoginService } from "../login/login.service";
 export class PodcastComponent implements OnInit, OnDestroy{
   podID: string;
   podcast: any;
-  formData: any = {};
+  selectedEpisodeID: string;
+  formData: any = {
+    'episodes': []
+  };
   isLoggedIn: boolean;
   private subscription: any;
 
@@ -29,6 +32,8 @@ export class PodcastComponent implements OnInit, OnDestroy{
       const that = this;
       let success = function (pod: any) {
         that.podcast = pod;
+        if(pod.episodes)
+          that.formData.episodes = pod.episodes;
       };
 
       this.podcastService.getPodcastFromID(this.podID).then(success);
@@ -41,6 +46,10 @@ export class PodcastComponent implements OnInit, OnDestroy{
   }
 
   editPodcast() {
+    console.log(this.formData);
+  }
+
+  editEpisode(episode: any) {
 
   }
 }

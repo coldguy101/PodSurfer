@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="span4 pull-center">
                             <div *ngIf="isLoggedIn">
-                                <button class="btn btn-primary">Edit Podcast</button>
+                                <button class="btn btn-primary" [routerLink]="['/podcast/edit/' + podID]">Edit Podcast</button>
                                 <div class="padding"></div>
                             </div>
                             <button class="btn btn-twitter"><!--i class="fa fa-twitter"</i>-->Twitter</button>
