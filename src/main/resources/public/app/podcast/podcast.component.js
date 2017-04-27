@@ -20,7 +20,7 @@ let PodcastComponent = class PodcastComponent {
         this.route = route;
         this.currentEpisode = {};
         this.formData = {
-            'episodes': [{}]
+            'episodes': []
         };
     }
     ngOnInit() {
@@ -44,18 +44,31 @@ let PodcastComponent = class PodcastComponent {
         this.podcastService.updatePodcast(this.formData, this.podID);
     }
     makeNewEpisode() {
+        console.log("got here...");
         let max = 0;
         for (let episode of this.formData.episodes) {
             if (episode.number > max) {
                 max = episode.number;
             }
         }
-        this.formData.episodes.push({
-            'name': 'Name',
-            'number': max + 1,
-            'review': 'Review',
-            'spoilers': false
-        });
+        if (max === 0) {
+            this.formData.episodes = [{
+                    'name': 'Name',
+                    'number': max + 1,
+                    'review': 'Review',
+                    'spoilers': false
+                }];
+        }
+        else {
+            this.formData.episodes.push({
+                'name': 'Name',
+                'number': max + 1,
+                'review': 'Review',
+                'spoilers': false
+            });
+        }
+        this.formData.episodes = this.formData.episodes.filter((res) => res);
+        console.log(this.formData.episodes.length);
     }
     editEpisode(episode) {
         this.currentEpisode = episode;

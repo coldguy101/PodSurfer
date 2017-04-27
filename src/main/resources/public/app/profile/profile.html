@@ -63,7 +63,7 @@
                 <th>Length</th>
                 <!--<th>Tags</th>-->
                 <th>Link</th>
-                <th>Delete</th>
+                <th>Remove</th>
             </tr>
             </thead>
             <tbody>
@@ -78,7 +78,7 @@
                 <td *ngIf="podcast.link">
                     <a href="{{ podcast.link }}" class="btn btn-primary">Get Podcast</a>
                 </td>
-                <td><button class="btn btn-danger" (click)="rmPodcast(podcast)">Delete</button></td>
+                <td><button class="btn btn-danger" (click)="removeBookmarkedPodcast(podcast)">Remove</button></td>
             </tr>
             </tbody>
         </table>

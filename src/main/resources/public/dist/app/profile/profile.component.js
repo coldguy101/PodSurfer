@@ -48,7 +48,8 @@ let ProfileComponent = class ProfileComponent {
         }
         this.profileService.updateProfile(this.formData, this.loginService.getToken());
     }
-    removeBookmarkedPodcast() {
+    removeBookmarkedPodcast(id) {
+        this.bookmarked = this.bookmarked.filter((cast) => cast._id !== id);
     }
 };
 ProfileComponent = __decorate([

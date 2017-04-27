@@ -55,7 +55,8 @@ export class ProfileComponent implements OnInit{
     this.profileService.updateProfile(this.formData, this.loginService.getToken());
   }
 
-  removeBookmarkedPodcast() {
-
+  removeBookmarkedPodcast(id: string) {
+    //this.bookmarked.rmPodcast(pcast._id);
+    this.bookmarked = this.bookmarked.filter((cast: any) => cast._id !== id);
   }
 }

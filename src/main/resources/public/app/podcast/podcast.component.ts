@@ -17,7 +17,7 @@ export class PodcastComponent implements OnInit, OnDestroy{
   podcast: any;
   currentEpisode: any = {};
   formData: any = {
-    'episodes': [{}]
+    'episodes': []
   };
   isLoggedIn: boolean;
   private subscription: any;
@@ -55,18 +55,30 @@ export class PodcastComponent implements OnInit, OnDestroy{
   }
 
   makeNewEpisode() {
+    console.log("got here...");
     let max = 0;
     for(let episode of this.formData.episodes) {
       if(episode.number > max) {
         max = episode.number;
       }
     }
-    this.formData.episodes.push({
-      'name':'Name',
-      'number': max + 1,
-      'review': 'Review',
-      'spoilers': false
-    })
+    if (max === 0) {
+      this.formData.episodes = [{
+        'name':'Name',
+        'number': max + 1,
+        'review': 'Review',
+        'spoilers': false
+      }]
+    } else {
+      this.formData.episodes.push({
+        'name': 'Name',
+        'number': max + 1,
+        'review': 'Review',
+        'spoilers': false
+      });
+    }
+    this.formData.episodes = this.formData.episodes.filter((res: any) => res);
+    console.log(this.formData.episodes.length);
   }
 
   editEpisode(episode: any) {

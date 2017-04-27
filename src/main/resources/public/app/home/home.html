@@ -7,6 +7,10 @@
 
     <input class="mdl-textfield--full-width podsearch" title="Search Podcasts..." placeholder="Search Podcasts..." type="text" [(ngModel)]="search">
 
+    <div class="row">
+        <h4>Your Recommended Podcasts:</h4>
+    </div>
+
     <div *ngFor="let podcast of recommendedPodcasts | filter : 'name' : search" class="col-md-4">
         <div class="well pod">
             <h4 class =""><a class="title" [routerLink]="'/podcast/' + podcast._id">{{podcast.name}}</a></h4>
@@ -14,10 +18,12 @@
         </div>
     </div>
 
-    <div *ngIf="recommendedPodcasts?.length <= 0">
-        <div class="text-center">
-            <div class="alert alert-info">
-                <strong>Loading...</strong> Loading Podcasts that are highly rated or fit into your interests!
+    <div class="row">
+        <div *ngIf="recommendedPodcasts?.length <= 0">
+            <div class="text-center">
+                <div class="alert alert-info">
+                    <strong>Loading...</strong> Loading Podcasts that are highly rated or fit into your interests!
+                </div>
             </div>
         </div>
     </div>

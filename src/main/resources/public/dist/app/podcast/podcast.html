@@ -33,7 +33,7 @@
             <input class="form-control" name="tags" id="podcastTags" type="text" [(ngModel)]="formData.tags" value="{{ tags ? tags : '' }}" [disabled]="!isLoggedIn">
         </div>
         <div class="form-group">
-            <label for="podcastImageURL">Link</label>
+            <label for="podcastImageURL">Image Link</label>
             <input class="form-control" name="imageURL" id="podcastImageURL" type="url" [(ngModel)]="formData.imageURL" value="{{podcast?.imageURL}}" [disabled]="!isLoggedIn">
         </div>
 
