@@ -1,5 +1,5 @@
 <div class="container">
-    <form (ngSubmit)="editPodcast()">
+    <form (ngSubmit)="updatePodcast()">
         <div class="form-group">
             <label for="podcastID">ID</label>
             <input class="form-control" name="id" id="podcastID" type="text" [(ngModel)]="formData._id" value="{{podcast?._id}}" disabled>
@@ -99,11 +99,10 @@
                 <!--</div>-->
             <!--</div>-->
         <!--</div>-->
+        <button type="button" class="btn btn-info btn-lg center-block" (click)="makeNewEpisode()">New Episode</button>
+
         <button class="btn btn-primary" type="submit">Save Changes</button>
     </form>
-
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
     <!-- Edit Modal -->
     <div *ngFor="let episode of formData.episodes">
@@ -148,8 +147,9 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <!--<button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>-->
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>

@@ -109,6 +109,26 @@ export class PodcastService {
       });
   }
 
+  updatePodcast(data: any, podID: string) {
+    console.log(data);
+    let headers: Headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + this.loginService.getToken());
+    return this.http.put("/api/podcast/update/" + podID, data, { headers: headers })
+      .subscribe(res => {
+        console.log(res);
+      });
+  }
+
+  // updateProfile(profile: any, token: string) {
+  //   console.log(profile);
+  //   let headers: Headers = new Headers();
+  //   headers.append('Authorization', 'Bearer ' + token);
+  //   return this.http.put("/api/user/update", profile, { headers: headers })
+  //     .subscribe(res => {
+  //       console.log(res);
+  //     });
+  // }
+
   rmPodcast(id: string) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');

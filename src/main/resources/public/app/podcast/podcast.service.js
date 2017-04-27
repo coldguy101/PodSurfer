@@ -51,6 +51,15 @@ let PodcastService = class PodcastService {
             return res;
         });
     }
+    updatePodcast(data, podID) {
+        console.log(data);
+        let headers = new http_1.Headers();
+        headers.append('Authorization', 'Bearer ' + this.loginService.getToken());
+        return this.http.put("/api/podcast/update/" + podID, data, { headers: headers })
+            .subscribe(res => {
+            console.log(res);
+        });
+    }
     rmPodcast(id) {
         let headers = new http_1.Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
