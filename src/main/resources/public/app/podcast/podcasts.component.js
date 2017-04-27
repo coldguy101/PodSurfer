@@ -30,8 +30,12 @@ let PodcastsComponent = class PodcastsComponent {
         this.podcastService.getAllPodcasts().then(success);
     }
     rmPodcast(pcast) {
-        delete this.podcasts[this.podcasts.indexOf(pcast)];
-        this.podcastService.rmPodcast(pcast._id);
+        if (confirm('Are you sure you want to delete this Podcast?')) {
+            this.podcastService.rmPodcast(pcast._id);
+            this.podcasts = this.podcasts.filter((cast) => cast._id !== pcast._id);
+        }
+        else {
+        }
     }
     favoritePodcast(podID) {
         this.profileService.addBookmark(podID, this.loginService.getToken());
