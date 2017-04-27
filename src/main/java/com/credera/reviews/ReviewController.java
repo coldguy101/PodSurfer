@@ -29,7 +29,7 @@ public class ReviewController {
         return result;
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping("/delete/{id}")
     public String deleteReview(
             @PathVariable(value="id") String id,
             @RequestHeader HttpHeaders headers) {

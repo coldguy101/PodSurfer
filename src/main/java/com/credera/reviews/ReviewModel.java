@@ -12,6 +12,7 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReviewModel {
 
+    private String _id;
     private String name;
     private String podcast;
     private int episode;
@@ -19,6 +20,10 @@ public class ReviewModel {
     private Boolean spoilers;
     private String review;
     private Object reviewer;
+
+    public String get_id() { return _id; }
+
+    public void set_id(String _id) { this._id = _id; }
 
     public String getName() {
         return name;

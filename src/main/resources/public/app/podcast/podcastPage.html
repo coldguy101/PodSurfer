@@ -78,12 +78,16 @@
             <!--</div>-->
             <div *ngIf="reviews?.length > 0" class="row">
                 <hr class="thickLine1">
-                <h3>User Reviews</h3>
+                <h3 class="text-center">User Reviews</h3>
                 <hr>
                 <div *ngFor="let review of reviews" class="review">
                     <div class="row">
                         <div class="col-md-11">
-                            <h5 style="margin-top: 0; margin-bottom: 0; font-weight: 800;">{{ review?.name }}</h5>
+                            <span>
+                                <h5 style="margin-top: 0; margin-bottom: 0; font-weight: 800;">{{ review?.name }}</h5>
+                                <button *ngIf="userID === review?.reviewer?.id" class="btn btn-danger"
+                                        (click)="deleteReview(review._id)">Delete</button>
+                            </span>
                             <small *ngIf="review?.reviewer?.name">By, {{ review?.reviewer?.name }}</small>
                         </div>
                         <div class="col-md-1 box">
@@ -98,7 +102,15 @@
                 </div>
             </div>
             <div *ngIf="isLoggedIn" class="reviewBox row">
-                <h4 class="text-center" style="margin-bottom: 0">Add Review</h4>
+                <div style="margin-top: 10px" class="alert alert-success alert-dismissible"
+                     *ngIf="reviewCreatePressed && reviewCreateSuccess">
+                    <strong>Review Created!</strong>
+                </div>
+                <div style="margin-top: 10px" class="alert alert-danger alert-dismissible"
+                     *ngIf="reviewCreatePressed && !reviewCreateSuccess">
+                    <strong>You are only allowed one review per podcast!</strong>
+                </div>
+                <h4 class="text-center" style="margin-top: 0; margin-bottom: 10px;">Add Review</h4>
                 <form #f="ngForm" (ngSubmit)="createReview()">
                     <div class="form-group">
                         <!--<label for="title">Title</label>-->
@@ -119,18 +131,11 @@
                         <small id="ratingHelp" class="form-text text-muted">Your 1-10 rating of {{ podcast?.name }}!</small>
                     </div>
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="newReview.spoilers" value="false" name="spoilers">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="newReview.spoilers" name="spoilers">
                         Does your review contain any spoilers?
                     </label>
                     <div>
                         <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
-                    </div>
-                    <div style="margin-top: 10px" class="alert alert-success alert-dismissible fade show" *ngIf="reviewCreatePressed && reviewCreateSuccess">
-                        <strong>Review Created!</strong>
-                    </div>
-                    <div style="margin-top: 10px" class="alert alert-danger alert-dismissible fade show"
-                         *ngIf="reviewCreatePressed && !reviewCreateSuccess">
-                        <strong>You are only allowed one review per podcast!</strong>
                     </div>
                 </form>
             </div>
