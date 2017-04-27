@@ -20,16 +20,22 @@ let PodcastPageComponent = class PodcastPageComponent {
         this.loginService = loginService;
         this.route = route;
         this.newReview = {};
+        this.reviewCreateSuccess = false;
+        this.reviewCreatePressed = false;
     }
     ngOnInit() {
         this.subscription = this.route.params.subscribe(params => {
             this.podID = params['id'];
+            this.newReview = {
+                'podcast': this.podID
+            };
             const that = this;
             let podSuccess = function (pod) {
                 that.podcast = pod;
             };
             let revSuccess = function (reviews) {
                 that.reviews = reviews;
+                console.log(reviews);
             };
             this.podcastService.getPodcastFromID(this.podID).then(podSuccess);
             this.reviewService.getReviewsForPodcast(this.podID).then(revSuccess);
@@ -37,6 +43,18 @@ let PodcastPageComponent = class PodcastPageComponent {
         });
     }
     createReview() {
+        console.log(this.newReview);
+        this.reviewService.createNewReview(this.newReview).subscribe(res => {
+            console.log(res);
+            if (res) {
+                this.reviews.push(res);
+                this.reviewCreateSuccess = true;
+                this.reviewCreatePressed = true;
+            }
+        }, error => {
+            console.log(error);
+            this.reviewCreatePressed = true;
+        });
     }
     checkCompleteness() {
     }
@@ -49,6 +67,9 @@ PodcastPageComponent = __decorate([
         selector: 'podcastPage',
         templateUrl: './app/podcast/podcastPage.html',
         styleUrls: ['./app/podcast/podcastPage.css'],
+        host: {
+            'style': 'margin-bottom: 0'
+        },
         providers: [podcast_service_1.PodcastService, review_service_1.ReviewService, login_service_1.LoginService]
     }), 
     __metadata('design:paramtypes', [podcast_service_1.PodcastService, review_service_1.ReviewService, login_service_1.LoginService, router_1.ActivatedRoute])

@@ -13,11 +13,12 @@ import java.util.Date;
 public class ReviewModel {
 
     private String name;
-    private String podcastID;
+    private String podcast;
     private int episode;
     private int rating;
     private Boolean spoilers;
     private String review;
+    private Object reviewer;
 
     public String getName() {
         return name;
@@ -28,11 +29,11 @@ public class ReviewModel {
     }
 
     public String getPodcast() {
-        return podcastID;
+        return podcast;
     }
 
     public void setPodcast(String podcast) {
-        this.podcastID = podcast;
+        this.podcast = podcast;
     }
 
     public Integer getEpisode() {
@@ -67,11 +68,15 @@ public class ReviewModel {
         this.review = review;
     }
 
+    public Object getReviewer() { return reviewer; }
+
+    public void setReviewer(Object reviewer) { this.reviewer = reviewer; }
+
     @Override
     public String toString() {
         return "ReviewModel{" +
                 "name='" + name + '\'' +
-                ", podcast=" + podcastID +
+                ", podcast=" + podcast +
                 ", episode=" + episode +
                 ", rating=" + rating +
                 ", spoilers=" + spoilers +
