@@ -1,6 +1,8 @@
 .podsearch {
+    height: 50px;
     margin-bottom: 20px;
-}
+    margin-top: 10px;
+ }
 .title
 {
     color: #000000;

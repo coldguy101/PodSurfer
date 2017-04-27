@@ -5,7 +5,7 @@
 
     <hr class="row"/>
 
-    <input class="mdl-textfield--full-width podsearch" title="Search Podcasts..." type="text" [(ngModel)]="search">
+    <input class="mdl-textfield--full-width podsearch" title="Search Podcasts..." placeholder="Search Podcasts..." type="text" [(ngModel)]="search">
 
     <div *ngFor="let podcast of recommendedPodcasts | filter : 'name' : search" class="col-md-4">
         <div class="well pod">
@@ -14,6 +14,13 @@
         </div>
     </div>
 
+    <div *ngIf="recommendedPodcasts?.length <= 0">
+        <div class="text-center">
+            <div class="alert alert-info">
+                <strong>Loading...</strong> Loading Podcasts that are highly rated or fit into your interests!
+            </div>
+        </div>
+    </div>
 
     <!--<div class="row">
         <div class="col-xs-offset-4 col-xs-4">

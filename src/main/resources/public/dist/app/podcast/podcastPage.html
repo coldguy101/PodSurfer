@@ -1,0 +1,144 @@
+<div class="container-fluid">
+    <div class="form-group row Header">
+        <div class="col-md-2">
+            <div *ngIf="!podcast?.imageURL">
+                <img class="Image img-rounded"
+                     src="http://shippingroompod.com/wp-content/themes/podcaster-child/img/placeholder-square.png"
+                     alt="Placeholder" width="250" height="202">
+                <!--<img class="Image" src="https://static1.squarespace.com/static/52d66949e4b0a8cec3bcdd46/t/52f20963e4b028d7d4c1f6d4/1391593828907/Hello+Internet.003.png" class="img-rounded" alt="Cinque Terre" width="250" height="202">-->
+            </div>
+            <div *ngIf="podcast?.imageURL">
+                <img class="Image img-rounded" src="{{ podcast?.imageURL }}" alt="Podcast Image" width="250"
+                     height="202">
+            </div>
+        </div>
+    </div>
+
+    <hr class="row col-md-12 thickLine">
+
+    <div class="row">
+        <div class="col-md-4 borderRight ">
+            <div class="centerBlock">
+                <h3>{{ podcast?.name }}</h3>
+                <!--Description-->
+                <p>{{ podcast?.description }}</p>
+                <div class="centerBlock">
+                    <div class="row">
+                        <div class="span4 pull-center">
+                            <div *ngIf="isLoggedIn">
+                                <button class="btn btn-primary" [routerLink]="['/podcast/edit/' + podID]">Edit Podcast</button>
+                                <div class="padding"></div>
+                            </div>
+                            <button class="btn btn-twitter"><!--i class="fa fa-twitter"</i>-->Twitter</button>
+                            <br>
+                            <div class="padding"></div>
+                            <button class="btn btn-linkedin"><!--i class="fa fa-facebook"</i>-->Facebook</button>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 table-responsive border">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Length</th>
+                    <th>Link</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let episode of podcast?.episodes"> <!--iterate over episodes-->
+                    <td>{{ episode.number }}</td>
+                    <td>{{ episode.name }}</td>
+                    <td>{{ episode.description }}</td>
+                    <td>{{ episode.length }}</td>
+
+                    <td *ngIf="!podcast?.link">
+                        <a class="btn btn-warning" disabled>Unavailable</a>
+                    </td>
+                    <td *ngIf="podcast?.link">
+                        <a href="{{ episode?.link }}" class="btn btn-primary">Get Episode</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--<div *ngIf="reviews?.length > 0">-->
+                <!--<div class="row">-->
+                    <!--<h3 class="text-center">Reviews</h3>-->
+                <!--</div>-->
+                <!--<div class="row" *ngFor="let review of reviews">-->
+                    <!--{{ review?.name }}-->
+                    <!--<hr/>-->
+                    <!--{{ review?.review }}-->
+            <!--</div>-->
+            <!--</div>-->
+            <div *ngIf="reviews?.length > 0" class="row">
+                <hr class="thickLine1">
+                <h3 class="text-center">User Reviews</h3>
+                <hr>
+                <div *ngFor="let review of reviews" class="review">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <span>
+                                <h5 style="margin-top: 0; margin-bottom: 0; font-weight: 800;">{{ review?.name }}</h5>
+                                <button *ngIf="userID === review?.reviewer?.id" class="btn btn-danger"
+                                        (click)="deleteReview(review._id)">Delete</button>
+                            </span>
+                            <small *ngIf="review?.reviewer?.name">By, {{ review?.reviewer?.name }}</small>
+                        </div>
+                        <div class="col-md-1 box">
+                            {{ review?.rating }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="padding-top: 10px" class="col-md-12">
+                            {{ review?.review }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isLoggedIn" class="reviewBox row">
+                <div style="margin-top: 10px" class="alert alert-success alert-dismissible"
+                     *ngIf="reviewCreatePressed && reviewCreateSuccess">
+                    <strong>Review Created!</strong>
+                </div>
+                <div style="margin-top: 10px" class="alert alert-danger alert-dismissible"
+                     *ngIf="reviewCreatePressed && !reviewCreateSuccess">
+                    <strong>You are only allowed one review per podcast!</strong>
+                </div>
+                <h4 class="text-center" style="margin-top: 0; margin-bottom: 10px;">Add Review</h4>
+                <form #f="ngForm" (ngSubmit)="createReview()">
+                    <div class="form-group">
+                        <!--<label for="title">Title</label>-->
+                        <input type="text" class="form-control" id="title" [(ngModel)]="newReview.name"
+                               aria-describedby="titleHelp" placeholder="Title" name="name" required>
+                        <small id="titleHelp" class="form-text text-muted">The title of your review.</small>
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="review">Review</label>-->
+                        <textarea class="form-control" id="review" [(ngModel)]="newReview.review"
+                                  placeholder="Review" rows="3" name="review" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="rating">Rating</label>-->
+                        <input type="number" class="form-control" id="rating" [(ngModel)]="newReview.rating"
+                               aria-describedby="ratingHelp" placeholder="1-10 Rating" name="rating"
+                               min="1" max="10" required>
+                        <small id="ratingHelp" class="form-text text-muted">Your 1-10 rating of {{ podcast?.name }}!</small>
+                    </div>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="newReview.spoilers" name="spoilers">
+                        Does your review contain any spoilers?
+                    </label>
+                    <div>
+                        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,48 +1,65 @@
-<div class="wrapper">
-    <form class="form-signin" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-        <h2 class="form-signin-heading">Login</h2>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-            <input type="text" class="form-control" name="email" placeholder="Email Address" [(ngModel)]="model.email" #username="ngModel" required autofocus />
-            <div *ngIf="f.submitted && !username.valid" class="help-block">Email is required</div>
+<div class="container">
+    <div class="col-md-6">
+        <form class="form-signin" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+            <h2 class="form-signin-heading">Login</h2>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                <input type="text" class="form-control" name="email" placeholder="Email Address" [(ngModel)]="model.email" #username="ngModel" required autofocus />
+                <!--<div *ngIf="f.submitted && !username.valid" class="help-block">Email is required</div>-->
+            </div>
+            <!--<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">-->
+            <div class="form-group" [ngClass]="checkPassword() ? 'has-success' : 'has-danger'">
+                <input type="password" class="form-control" [ngClass]="checkPassword() ? 'form-control-success' : 'form-control-danger'" name="password" placeholder="Password" [(ngModel)]="model.password" #password="ngModel" required />
+                <!--<div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>-->
+            </div>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">Login</button>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                <!--<a [routerLink]="['/register']" class="btn btn-link">Register</a>-->
+            </div>
+        </form>
+        <div class="row">
+            <div style="margin-top: 10px" class="alert alert-danger alert-dismissible"
+                 *ngIf="errorLoggingIn">
+                <strong>Error signing in! Incorrect username or password!</strong>
+            </div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-            <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="model.password" #password="ngModel" required />
-            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+    </div>
+    <div class = "col-md-6">
+        <form class="form-signin" name="createUser" (ngSubmit)="f2.form.valid && createUser()" #f2="ngForm" novalidate>
+            <h2 class="form-signin-heading">Create New User</h2>
+            <!--<div class="form-group" [ngClass]="{ 'has-error': f2.submitted && !name.valid }">-->
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder="First and Last Name" [(ngModel)]="registerModel.name" #name="ngModel" required />
+                <!--<div *ngIf="f2.submitted && !password.valid" class="help-block">Password is required</div>-->
+            </div>
+            <!--<div class="form-group" [ngClass]="{ 'has-error': f2.submitted && !email.valid }">-->
+            <div class="form-group">
+                <input type="text" class="form-control" name="email" placeholder="Email Address" [(ngModel)]="registerModel.email" #email="ngModel" required />
+                <!--<div *ngIf="f2.submitted && !username.valid" class="help-block">Email is required</div>-->
+            </div>
+            <!--<div class="form-group" [ngClass]="{ 'has-error': f2.submitted && !password.valid }">-->
+            <div class="form-group" [ngClass]="checkPasswordRegister() ? 'has-success' : 'has-danger'">
+                <input type="password" class="form-control" [ngClass]="checkPasswordRegister() ? 'form-control-success' : 'form-control-danger'" name="password" placeholder="Password" [(ngModel)]="registerModel.password" #password="ngModel" required />
+                <!--<div *ngIf="f2.submitted && !password.valid" class="help-block">Password is required</div>-->
+            </div>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">Register</button>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                <!--<a [routerLink]="['/register']" class="btn btn-link">Register</a>-->
+            </div>
+        </form>
+        <div class="row" *ngIf="!validPassword">
+            <div style="margin-top: 10px" class="alert alert-danger">
+                <strong>Error: Password must contain at least one uppercase character, one lowercase letter, a number, and a special character (@#$%^&*)</strong>
+            </div>
         </div>
-        <label class="checkbox">
-            <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
-        </label>
-        <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Login</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <!--<a [routerLink]="['/register']" class="btn btn-link">Register</a>-->
+        <div class="row">
+            <div style="margin-top: 10px" class="alert alert-danger"
+                 *ngIf="errorSigningUp">
+                <strong>Error: Password must contain at least one uppercase character, one lowercase letter, a number, and a special character (@#$%^&*)</strong>
+            </div>
         </div>
-    </form>
-</div>
-
-<hr/>
-
-<div class="wrapper">
-    <form class="form-signin" name="createUser" (ngSubmit)="f2.form.valid && createUser()" #f2="ngForm" novalidate>
-        <h2 class="form-signin-heading">Create New User</h2>
-        <div class="form-group" [ngClass]="{ 'has-error': f2.submitted && !name.valid }">
-            <input type="text" class="form-control" name="name" placeholder="First and Last Name" [(ngModel)]="registerModel.name" #name="ngModel" required />
-            <div *ngIf="f2.submitted && !password.valid" class="help-block">Password is required</div>
-        </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f2.submitted && !email.valid }">
-            <input type="text" class="form-control" name="email" placeholder="Email Address" [(ngModel)]="registerModel.email" #email="ngModel" required />
-            <div *ngIf="f2.submitted && !username.valid" class="help-block">Email is required</div>
-        </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f2.submitted && !password.valid }">
-            <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="registerModel.password" #password="ngModel" required />
-            <div *ngIf="f2.submitted && !password.valid" class="help-block">Password is required</div>
-        </div>
-        <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Register</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <!--<a [routerLink]="['/register']" class="btn btn-link">Register</a>-->
-        </div>
-    </form>
+    </div>
 </div>
         <!--<button class="btn btn-lg btn-primary btn-block" type="submit" onsubmit="onSubmit()">Login</button>
         <button class="btn btn-lg btn-info btn-block" type="button">Create Account</button>
@@ -50,7 +67,7 @@
 </div>
 
 
-
+/////////////////////
 <div class="col-md-6 col-md-offset-3">
     <h2>Login</h2>
     <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>

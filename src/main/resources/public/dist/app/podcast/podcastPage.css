@@ -1,0 +1,97 @@
+.thickLine
+{
+    border-top: 5px solid #a2998d;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+.Header
+{
+    background-color:antiquewhite;
+    padding-bottom: 20px;
+    margin-bottom: 0;
+}
+
+.thickLine1
+{
+    border-top: 2px solid #a2998d;
+    margin-bottom: 0px;
+}
+
+.podDesc
+{
+    padding-top:  20px;
+    padding-left: 30px;
+}
+
+.Image
+{
+    padding-left: 15px;
+    padding-top: 20px;
+}
+.border
+{
+    padding-right:20px;
+    border-right: 1px solid #ccc;
+    padding-left:20px;
+    border-left: 1px solid #ccc;
+}
+
+.padding
+{
+    padding-top:5px;
+}
+
+.centerBlock {
+    padding-left: 20px;
+}
+
+.box
+{
+    background: #ADD8E6;
+    padding-top: 14px;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.banner
+{
+    padding-top: 63px;
+    padding-right: 150px;
+
+}
+
+.reviewBox {
+    position: relative;
+    padding: 2rem;
+    margin: 1rem -1rem;
+    border: 3px solid #f7f7f9;
+    //border-width: .2rem 0 0;
+}
+
+.review {
+    border-bottom: 1px solid #a2998d;
+    padding-bottom: 10px;
+    margin-top: 10px;
+
+}
+
+/*:host {*/
+    /*margin-bottom: 0 !important;*/
+/*}*/
+
+/*:host(.navbar) nav {*/
+    /*margin-bottom: 0;*/
+/*}*/
+
+/*:host(.navbar) {*/
+    /*margin-bottom: 0;*/
+/*}*/
+
+/*:host(nav) {*/
+    /*margin-bottom: 0;*/
+/*}*/
+
+/*:host /deep/ .navbar {*/
+    /*margin-bottom: 0;*/
+/*}*/
